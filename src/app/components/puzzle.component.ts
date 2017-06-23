@@ -67,9 +67,15 @@ import * as _ from "lodash";
 		.tile {
 			width: 80px;
 			height: 80px;
+			line-height: 80px;
 			float: left;
-			justify-content: center;
-			border: 2px solid grey;
+			justify-content: center;   
+			text-align: center;
+			margin: 2px;
+			font-size: 30px;
+			color: #0f0a33;
+			font-weight: 900;
+			background-color: antiquewhite;
 			border-right-width: 0;
 			border-bottom-width: 0;
 		}
@@ -78,7 +84,7 @@ import * as _ from "lodash";
 			height: 40px;
 			float: left;
 			justify-content: center;
-			border: 2px solid grey;
+			margin: 2px;
 			border-right-width: 0;
 			border-bottom-width: 0;
 		}
@@ -166,28 +172,17 @@ import * as _ from "lodash";
 })
 export class PuzzleComponent {
     GOAL_STATE = [
-        { x: 1, y: 1, value: 1 },
-        { x: 2, y: 1, value: 2 },
-        { x: 3, y: 1, value: 3 },
-        { x: 1, y: 2, value: 4 },
-        { x: 2, y: 2, value: 5 },
-        { x: 3, y: 2, value: 6 },
-        { x: 1, y: 3, value: 7 },
-        { x: 2, y: 3, value: 8 },
-        { x: 3, y: 3, value: null}
+        { x: 1, y: 1, value: 1 }, { x: 2, y: 1, value: 2 }, { x: 3, y: 1, value: 3 },
+        { x: 1, y: 2, value: 4 }, { x: 2, y: 2, value: 5 }, { x: 3, y: 2, value: 6 },
+        { x: 1, y: 3, value: 7 }, { x: 2, y: 3, value: 8 }, { x: 3, y: 3, value: null}
     ];
 
     board = [
-        { x: 1, y: 1, value: 1 },
-        { x: 2, y: 1, value: 2 },
-        { x: 3, y: 1, value: 3 },
-        { x: 1, y: 2, value: 4 },
-        { x: 2, y: 2, value: null },
-        { x: 3, y: 2, value: 5 },
-        { x: 1, y: 3, value: 7 },
-        { x: 2, y: 3, value: 8 },
-        { x: 3, y: 3, value: 6}
+        { x: 1, y: 1, value: 1 }, { x: 2, y: 1, value: 2 }, { x: 3, y: 1, value: 3 },
+        { x: 1, y: 2, value: 4 }, { x: 2, y: 2, value: null },{ x: 3, y: 2, value: 5 },
+        { x: 1, y: 3, value: 7 }, { x: 2, y: 3, value: 8 }, { x: 3, y: 3, value: 6}
     ];
+
     moves = [ ];
     movement;
     aStar;
