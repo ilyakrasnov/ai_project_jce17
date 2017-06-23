@@ -13,7 +13,8 @@ import * as _ from "lodash";
         <md-card>
             <md-card-title-group>
                 <!--<img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>-->
-                <md-card-title>Moves: {{ moves.length }}, Finished: {{ finished() }}</md-card-title>
+                <md-card-title>Moves: {{ moves.length }}, Finished: <span ><md-icon  ng-class="md-48" *ngIf=" finished()">done</md-icon></span>{{ finished() }}
+                </md-card-title>
                 <!--<md-card-subtitle *ngIf="subtitle">{{ subtitle | bcEllipsis:40 }}</md-card-subtitle>-->
             </md-card-title-group>
             <md-card-content>
@@ -64,6 +65,12 @@ import * as _ from "lodash";
 
     `,
     styles: [`
+		md-icon{
+			font-size:45px;
+			height:45px;
+			width: 45px;
+			color: green;
+		}
 		.tile {
 			width: 80px;
 			height: 80px;
