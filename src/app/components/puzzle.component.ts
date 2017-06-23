@@ -10,8 +10,6 @@ import * as _ from "lodash";
     selector: 'puzzle',
     template: `
         <!--<bc-book-preview *ngFor="let book of books" [book]="book"></bc-book-preview>-->
-        
-        
         <md-card>
             <md-card-title-group>
                 <!--<img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>-->
@@ -25,14 +23,44 @@ import * as _ from "lodash";
                     </div>
                 </div>
             </md-card-content>
-            
         </md-card>
-        
+
         <h2>Fringe:</h2>
-        <pre>{{ getFringe() | json }}</pre>
+        <pre>{{ getFringe().board  | json }}</pre>
+        <!--<md-card  class="mini" *ngFor="let fringeBoard of getFringe().board">-->
+        <!--<md-card-title-group>-->
+        <!--<md-card-title>F = g + h = {{ fringeBoard.f }}</md-card-title>-->
+        <!--</md-card-title-group>-->
+        <!--<md-card-content>-->
+        <!--<div class="puzzle-mini">-->
+        <!--<div class="tile-mini" *ngFor="let tile of fringeBoard" (click)="tileClicked(tile.value)">-->
+        <!--{{tile.value}}-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</md-card-content>-->
+        <!--</md-card>-->
+
 
         <h2>Closed:</h2>
-        <pre>{{ getClosed() | json }}</pre>
+        <md-card  class="mini" *ngFor="let closedBoard of getClosed().board">
+            <md-card-title-group>
+                <md-card-title>F = g + h</md-card-title>
+            </md-card-title-group>
+            <md-card-content>
+                <div class="puzzle-mini">
+                    <div class="tile-mini" *ngFor="let tile of closedBoard" (click)="tileClicked(tile.value)">
+                        {{tile.value}}
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+
+
+        <!---->
+        <!--<pre>{{ getFringe() | json }}</pre>-->
+
+        <!--<h2>Closed:</h2>-->
+        <!--<pre>{{ getClosed() | json }}</pre>-->
 
     `,
     styles: [`
@@ -44,7 +72,15 @@ import * as _ from "lodash";
 			border: 2px solid grey;
 			border-right-width: 0;
 			border-bottom-width: 0;
-
+		}
+		.tile-mini {
+			width: 40px;
+			height: 40px;
+			float: left;
+			justify-content: center;
+			border: 2px solid grey;
+			border-right-width: 0;
+			border-bottom-width: 0;
 		}
 		.tile:nth-child(3n) {
 			border-right-width: 2px;
@@ -62,8 +98,30 @@ import * as _ from "lodash";
 			border-bottom-width: 2px;
 		}
 
+
+		.tile-mini:nth-child(3n) {
+			border-right-width: 2px;
+		}
+
+		.tile-mini:nth-child(7n) {
+			border-bottom-width: 2px;
+		}
+
+		.tile-mini:nth-child(8n) {
+			border-bottom-width: 2px;
+		}
+
+		.tile-mini:nth-child(9n) {
+			border-bottom-width: 2px;
+		}
 		.puzzle {
 			width: 300px;
+		}
+
+		.mini  {
+			width: 170px;
+			height: 220px;
+			margin: 15px;
 		}
 		md-card {
 			width: 400px;
@@ -124,8 +182,8 @@ export class PuzzleComponent {
         { x: 2, y: 1, value: 2 },
         { x: 3, y: 1, value: 3 },
         { x: 1, y: 2, value: 4 },
-        { x: 2, y: 2, value: 5 },
-        { x: 3, y: 2, value: null },
+        { x: 2, y: 2, value: null },
+        { x: 3, y: 2, value: 5 },
         { x: 1, y: 3, value: 7 },
         { x: 2, y: 3, value: 8 },
         { x: 3, y: 3, value: 6}
@@ -181,7 +239,7 @@ class AStar {
     // start;
     fringe = [];
     closed = [];
-    g: 0;
+    g = 0;
     heuristicFunction;
 
     readonly HEURISTIC_FUNCITONS = {
@@ -191,10 +249,13 @@ class AStar {
 
     constructor(goal, start, movement, h = 1) {
         this.goal = goal;
-        // this.start = start;
-        this.fringe.push(start);
         this.movement = movement;
         this.heuristicFunction = h;
+        // this.start = start;
+        this.pushToFringe( {
+            f: this.f(start),
+            board: start
+        });
     }
 
     getFringe(){
@@ -205,24 +266,55 @@ class AStar {
         return this.closed;
     }
     run(){
-        let node = _.head(this.fringe);
-        if (node) {
-            if (this.goalReached(node)) {
-                console.log("###### GOAL REACHED ######");
-            } else {
-                this.closed.push(node);
-                this.g += 1;
-                let children = this.children(node);
+        console.log("###### FRINGE ######");
+        console.log(this.fringe);
 
-                for (var child of children) {
-                    if (child) {
-                        this.f(child);
+        console.log("###### CLOSED ######");
+        console.log(this.closed);
+
+        while(!_.isEmpty(this.fringe)) {
+            let node = _.head(this.fringe);
+            this.fringe = _.tail(this.fringe);
+            if (node) {
+                if (this.goalReached(node)) {
+                    console.log("###### GOAL REACHED ######");
+                    return;
+                } else {
+                    this.closed.push(node);
+                    this.g += 1;
+                    let children = this.children(node.board);
+
+                    // TODO sort children by value (number in the tile)
+                    for (var child of children) {
+                        if (child) {
+
+                            this.pushToFringe( {
+                                board: child,
+                                f: this.f(child)
+                            });
+                        }
                     }
                 }
+            } else {
+                // console.log("###### FRINDGE EMPTY... :( ######");
             }
-        } else {
-            // console.log("###### FRINDGE EMPTY... :( ######");
         }
+
+    }
+
+    pushToFringe(node){
+        if(_.isEmpty(this.fringe)) {
+
+            this.fringe.push(node);
+        } else {
+
+            let index = _.findIndex(this.fringe, function(nodeInFringe) { return nodeInFringe.f > node.f });
+            this.fringe.splice(index, 0, node);
+        }
+
+        console.log("###### NEW FRINGE ######");
+        console.log(this.fringe);
+
     }
 
     f(board){
@@ -232,7 +324,7 @@ class AStar {
     hFunction(board){
 
         let heuristic = this.HEURISTIC_FUNCITONS[this.heuristicFunction];
-        return heuristic(board, this.goal);
+        return heuristic(board, this.goal) - 1;
     }
 
     nrOfMisplacedTiles(board, goal){
@@ -253,7 +345,11 @@ class AStar {
     }
 
     goalReached(node){
-        for (var tile of node) {
+        console.log("###### CHECKING IF REACHED GOAL ######");
+        console.log(node.board);
+        console.log(this.goal);
+
+        for (var tile of node.board) {
             if (!_.find(this.goal, tile)) {
                 return false;
             }
@@ -273,10 +369,10 @@ class AStar {
 
     }
 
-     private nextState(board, x, y) {
-         if (this.isOnBoard(x, y)){
+    private nextState(board, x, y) {
+        if (this.isOnBoard(x, y)){
             let value = _.find(board, { x: x, y: y }).value;
-             return this.movement.make_move(board, value);
+            return this.movement.make_move(board, value);
         }
     }
 
