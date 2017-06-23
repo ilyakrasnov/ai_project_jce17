@@ -13,7 +13,11 @@ import * as _ from "lodash";
         <md-card>
             <md-card-title-group>
                 <!--<img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>-->
-                <md-card-title>Moves: {{ moves.length }}, Finished: <span ><md-icon  ng-class="md-48" *ngIf=" finished()">done</md-icon></span>{{ finished() }}
+                <md-card-title>Moves: {{ moves.length }}, Finished: 
+	                <span ng-class="md-48">
+		                <md-icon  class="green" *ngIf=" finished()">done</md-icon>
+		                <md-icon  class="red" *ngIf="!finished()">clear</md-icon>
+	                </span>{{ finished() }}
                 </md-card-title>
                 <!--<md-card-subtitle *ngIf="subtitle">{{ subtitle | bcEllipsis:40 }}</md-card-subtitle>-->
             </md-card-title-group>
@@ -66,11 +70,19 @@ import * as _ from "lodash";
     `,
     styles: [`
 		md-icon{
-			font-size:45px;
-			height:45px;
-			width: 45px;
+			 font-size:45px;
+			 height:45px;
+			 width: 45px;
+		 }
+
+		.mat-icon.green{
 			color: green;
 		}
+		.mat-icon.red{
+			color: red;
+		}
+		
+		
 		.tile {
 			width: 80px;
 			height: 80px;
