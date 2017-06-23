@@ -6,7 +6,7 @@ import { Book } from '../models/book';
 import * as _ from "lodash";
 
 
-@Injectable()
+// @Injectable()
 export class MovementService {
 
   move;
@@ -15,10 +15,10 @@ export class MovementService {
     let tile = Object.assign({}, _.find(board, { value: tile_number }));
     let _board = Object.assign([], board);
     this.move = new Move(_board, tile);
-    return this.validateAndMove();
+    return this.validate();
   }
 
-  validateAndMove() {
+  validate() {
     let moveTo = this.move.isLigit();
     if (moveTo) {
       console.log("###### THIS IS A VALID MOVE ######");
@@ -41,9 +41,6 @@ class Move {
   }
 
   move(destination){
-    console.log("###### BOARD######");
-    console.log(this.board);
-
     let originIndex = _.findIndex(this.board, this.tile);
     let destinationIndex = _.findIndex(this.board, destination);
     let newDestinationValue = this.tile.value;
@@ -69,9 +66,6 @@ class Move {
   }
 
   private canMoveRight(){
-    console.log("###### CHEKCING RIGHT ######");
-    console.log(this.tile.x + 1, this.tile.y);
-
     return this.canMoveToNewCoords(this.tile.x + 1, this.tile.y);
   }
 
