@@ -277,7 +277,7 @@ class AStar {
             this.fringe = _.tail(this.fringe);
             if (node) {
                 if (this.goalReached(node)) {
-                    console.log("###### GOAL REACHED ######");
+                    console.log(`###### GOAL REACHED AFTER ${this.g} STEPS ######"`);
                     return;
                 } else {
                     this.closed.push(node);
