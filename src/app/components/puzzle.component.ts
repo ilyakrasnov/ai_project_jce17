@@ -4,6 +4,7 @@ import { MovementService } from "../services/movement"
 import { Book } from '../models/book';
 import * as book from '../actions/puzzle';
 import * as _ from "lodash";
+import {PuzzelCreatorService} from "../services/puzzel-creator";
 
 
 @Component({
@@ -220,68 +221,34 @@ export class PuzzleComponent {
 	board = [];
 
 	moves = [ ];
-	movement;
 	aStar;
 
-	constructor() {
-		this.movement = new MovementService();
-		this.createBoard();
-		this.createGoalState();
+	constructor(private movement: MovementService,
+				private puzzleCreator: PuzzelCreatorService) {
+		// this.movement = new MovementService();
+
+
+		// this.createBoard();
+		// this.createGoalState();
 		this.aStar = new AStar(this.GOAL_STATE, this.board, this.movement);
+	}
+
+	ngOnInit(){
+		console.log("###### ONITIN ######");
+		console.log();
+
+		this.initializeBoardAndGoal();
+	}
+	
+	initializeBoardAndGoal(){
+		this.board = this.puzzleCreator.createBoard(this.DIMENSION);
+		this.GOAL_STATE = this.puzzleCreator.createGoalState(this.DIMENSION);
 	}
 
 	runAlgorithm(){
 		this.aStar.run();
 	}
-	createBoard(){
-		let range = _.range(1, this.DIMENSION + 1);
-		let emptyBoard = this.emptyBoard(range);
-		this.board = this.randomize(emptyBoard);
-	}
-	
-	createGoalState(){
-		let range = _.range(1, this.DIMENSION + 1);
-		let emptyBoard = this.emptyBoard(range);
 
-		let nrOfCells = this.DIMENSION ** 2;
-		let numbers = _.range(1, nrOfCells).concat([null]);
-		this.GOAL_STATE = this.assignNumbersToBoard(numbers, emptyBoard);
-		console.log("###### GOAL + ######");
-		console.log(this.GOAL_STATE);
-
-	}
-
-	randomize(board){
-		let nrOfCells = this.DIMENSION ** 2;
-		let range = _.range(1, nrOfCells).concat([null]);
-		let randomNumbers = _.sampleSize(range, nrOfCells);
-		
-		return this.assignNumbersToBoard(randomNumbers, board);
-	}
-	
-	assignNumbersToBoard(numbers, board) {
-		_.each(numbers, (n, index) => {
-			board[index] = Object.assign({}, board[index], {
-				value: n
-			});
-		});
-		
-		return board;
-	}
-
-	emptyBoard(range){
-		let board = [];
-		range.map( (y) => {
-			range.map( (x) => {
-				board.push({
-					x,
-					y,
-					value: null
-				})
-			})
-		})
-		return board;
-	}
 	boardRows() {
 		return _.chunk(this.board, this.DIMENSION);
 	}

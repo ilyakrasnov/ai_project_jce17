@@ -25,6 +25,7 @@ import { NotFoundPageComponent } from './containers/not-found-page';
 
 import { GoogleBooksService } from './services/google-books';
 import { MovementService } from './services/movement';
+import { PuzzelCreatorService } from './services/puzzel-creator';
 
 import { routes } from './routes';
 import { reducer } from './reducers';
@@ -94,7 +95,8 @@ import { schema } from './db';
   providers: [
     BookExistsGuard,
     GoogleBooksService,
-      MovementService
+      MovementService,
+      PuzzelCreatorService
   ],
   bootstrap: [
     AppComponent

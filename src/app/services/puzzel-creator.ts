@@ -6,120 +6,78 @@ import { Book } from '../models/book';
 import * as _ from "lodash";
 
 
-// @Injectable()
+@Injectable()
 export class PuzzelCreatorService {
 
-  move;
+  dimension;
 
-  make_move(board, tile_number) {
-    let tile = Object.assign({}, _.find(board, { value: tile_number }));
-    let _board = Object.assign([], board);
-    this.move = new Move(_board, tile);
-    return this.validate();
+  // createPuzzle(dimension) {
+  //   this.dimension = dimension;
+  //
+  //   let board = this.createBoard();
+  //   let goalState = this.createGoalState()
+  //
+  //   console.log("###### BOARD CREATED ######");
+  //   console.log(board);
+  //
+  //   console.log("###### GOAL STATE ######");
+  //   console.log(goalState);
+  //
+  //   return [board, goalState];
+  // }
+
+  createBoard(dimension){
+    // this.dimension = dimension;
+
+    let range = _.range(1, dimension + 1);
+    let emptyBoard = this.emptyBoard(range);
+    return this.randomize(emptyBoard, dimension);
   }
 
-  validate() {
-    let moveTo = this.move.isLigit();
-    if (moveTo) {
-      console.log("###### THIS IS A VALID MOVE ######");
-      return this.move.move(moveTo);
+  createGoalState(dimension){
+    // this.dimension = dimension;
 
-    } else {
-      console.log("###### SORRY, CAN'T MOVE IT ######");
-      console.log(this.move.isLigit());
-    }
-  }
-}
+    let range = _.range(1, dimension + 1);
+    let emptyBoard = this.emptyBoard(range);
 
-class Move {
-  board;
-  tile;
-
-  constructor(board, tile){
-    this.board = board;
-    this.tile = tile;
+    let nrOfCells = dimension ** 2;
+    let numbers = _.range(1, nrOfCells).concat([null]);
+    return this.assignNumbersToBoard(numbers, emptyBoard);
   }
 
-  move(destination){
-    let originIndex = _.findIndex(this.board, this.tile);
-    let destinationIndex = _.findIndex(this.board, destination);
-    let newDestinationValue = this.tile.value;
-    let newOriginValue = null;
+  randomize(board, dimension){
+    
 
-    this.board[destinationIndex] = Object.assign({}, this.board[destinationIndex], {
-      value: newDestinationValue
+    let nrOfCells = dimension ** 2;
+    let range = _.range(1, nrOfCells).concat([null]);
+    let randomNumbers = _.sampleSize(range, nrOfCells);
+
+    return this.assignNumbersToBoard(randomNumbers, board);
+  }
+
+  assignNumbersToBoard(numbers, board) {
+    let newBoard = Object.assign([], board);
+    _.each(numbers, (n, index) => {
+      newBoard[index] = Object.assign({}, newBoard[index], {
+        value: n
+      });
     });
 
-
-    this.board[originIndex] = Object.assign({}, this.board[originIndex], {
-      value: newOriginValue
-    });
-
-    return Object.assign([], this.board);
+    return newBoard;
   }
 
-  isLigit(){
-    return this.canMoveRight() ||
-           this.canMoveLeft() ||
-           this.canMoveUp() ||
-           this.canMoveDown()
-  }
-
-  private canMoveRight(){
-    return this.canMoveToNewCoords(this.tile.x + 1, this.tile.y);
-  }
-
-  private canMoveLeft(){
-    return this.canMoveToNewCoords(this.tile.x - 1, this.tile.y);
-  }
-
-  private canMoveUp(){
-    return this.canMoveToNewCoords(this.tile.x, this.tile.y - 1);
-  }
-
-  private canMoveDown(){
-    return this.canMoveToNewCoords(this.tile.x, this.tile.y + 1);
-  }
-
-  private canMoveToNewCoords(new_x, new_y) {
-    if (this.isOnBoard(new_x, new_y) && this.isEmpty(new_x, new_y)) {
-
-      return this.newCoords(new_x, new_y);
-    } else {
-      return null;
-    }
-  }
-
-  private newCoords(new_x, new_y) {
-    return {
-      x: new_x,
-      y: new_y
-    }
-  }
-
-  private isEmpty(x_coord, y_coord) {
-    let tile = _.find(this.board, { x: x_coord, y: y_coord});
-    if (tile.value) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  private isOnBoard(x, y) {
-    if (this.withinDimensions(x) && this.withinDimensions(y)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  private withinDimensions(n) {
-    if (n >= 1 && n <= 3) {
-      return true;
-    } else {
-      return false;
-    }
+  emptyBoard(range){
+    let board = [];
+    range.map( (y) => {
+      range.map( (x) => {
+        board.push({
+          x,
+          y,
+          value: null
+        })
+      })
+    })
+    return board;
   }
 
 }
