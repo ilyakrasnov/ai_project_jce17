@@ -11,22 +11,22 @@ export class MovementService {
 
   move;
 
-  make_move(board, tile_number) {
+  make_move(board, tile_number, dimension) {
     let tile = Object.assign({}, _.find(board, { value: tile_number }));
     let _board = Object.assign([], board);
-    this.move = new Move(_board, tile);
+    this.move = new Move(_board, tile, dimension);
     return this.validate();
   }
 
   validate() {
     let moveTo = this.move.isLigit();
     if (moveTo) {
-      console.log("###### THIS IS A VALID MOVE ######");
+      // console.log("###### THIS IS A VALID MOVE ######");
       return this.move.move(moveTo);
 
     } else {
-      console.log("###### SORRY, CAN'T MOVE IT ######");
-      console.log(this.move.isLigit());
+      // console.log("###### SORRY, CAN'T MOVE IT ######");
+      // console.log(this.move.isLigit());
     }
   }
 }
@@ -34,10 +34,12 @@ export class MovementService {
 class Move {
   board;
   tile;
+  dimension;
 
-  constructor(board, tile){
+  constructor(board, tile, dimension){
     this.board = board;
     this.tile = tile;
+    this.dimension = dimension;
   }
 
   move(destination){
@@ -50,7 +52,6 @@ class Move {
       value: newDestinationValue
     });
 
-
     this.board[originIndex] = Object.assign({}, this.board[originIndex], {
       value: newOriginValue
     });
@@ -62,7 +63,7 @@ class Move {
     return this.canMoveRight() ||
            this.canMoveLeft() ||
            this.canMoveUp() ||
-           this.canMoveDown()
+           this.canMoveDown();
   }
 
   private canMoveRight(){
@@ -83,7 +84,6 @@ class Move {
 
   private canMoveToNewCoords(new_x, new_y) {
     if (this.isOnBoard(new_x, new_y) && this.isEmpty(new_x, new_y)) {
-
       return this.newCoords(new_x, new_y);
     } else {
       return null;
@@ -115,7 +115,7 @@ class Move {
   }
 
   private withinDimensions(n) {
-    if (n >= 1 && n <= 3) {
+    if (n >= 1 && n <= this.dimension) {
       return true;
     } else {
       return false;

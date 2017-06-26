@@ -57,8 +57,8 @@ export class PuzzelCreatorService {
     let possibleSample = _.sampleSize(range, nrOfCells);
 
     while (!this.solvable(possibleSample)) {
-      console.log("###### PUZZLE UNSOLVABLE, redoing ######");
-      console.log();
+      // console.log("###### PUZZLE UNSOLVABLE, redoing ######");
+      // console.log();
 
       possibleSample = _.sampleSize(range, nrOfCells);
     }
