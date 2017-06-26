@@ -46,13 +46,43 @@ export class PuzzelCreatorService {
   }
 
   randomize(board, dimension){
-    
-
     let nrOfCells = dimension ** 2;
     let range = _.range(1, nrOfCells).concat([null]);
-    let randomNumbers = _.sampleSize(range, nrOfCells);
+    let randomNumbers = this.solvableSample(range, nrOfCells) ;
 
     return this.assignNumbersToBoard(randomNumbers, board);
+  }
+
+  solvableSample(range, nrOfCells) {
+    let possibleSample = _.sampleSize(range, nrOfCells);
+
+    while (!this.solvable(possibleSample)) {
+      console.log("###### PUZZLE UNSOLVABLE, redoing ######");
+      console.log();
+
+      possibleSample = _.sampleSize(range, nrOfCells);
+    }
+
+    return possibleSample;
+  }
+
+  solvable(array) {
+    let totalInversions = 0;
+    for (var x of array) {
+      totalInversions = totalInversions + this.countInversions(x, array);
+    }
+    return this.isEven(totalInversions)
+  }
+
+  isEven(x){
+    return (x % 2) == 0;
+  }
+  
+  countInversions(x, array) {
+    let index = array.findIndex( el => el == x);
+    let tailAfterX = _.slice(array, index + 1);
+    return tailAfterX.map( el => el < x)
+        .reduce((a, b) => a + b, 0);
   }
 
   assignNumbersToBoard(numbers, board) {
