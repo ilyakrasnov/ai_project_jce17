@@ -68,7 +68,9 @@ export class AStar {
               let f = this.f(child);
               this.pushToFringe( {
                 board: child,
-                f: f
+                f: f,
+	            g: this.g,
+	            h: this.hFunction(child)
               });
             }
           }
@@ -130,7 +132,9 @@ export class AStar {
         misplaced = misplaced + 1;
       }
     }
-    misplaced = misplaced - 1;
+    if ( board[board.length -1].value !== null) {
+	    misplaced = misplaced - 1;
+    };
     return misplaced;
   }
 

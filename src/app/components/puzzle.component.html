@@ -46,7 +46,7 @@
 					<ng-container *ngFor="let closedBoard of closedBoards">
 						<p></p>
 						<p></p>
-						<p>F: {{ closedBoard.f }}</p>
+						<p>F = g + h = {{ closedBoard.g }} + {{ closedBoard.h }}</p>
 
 
 						<div class="row" *ngFor="let row of closedRows(closedBoard.board)">
