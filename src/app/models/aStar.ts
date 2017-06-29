@@ -7,6 +7,7 @@ export class AStar {
   start;
   fringe = [];
   closed = [];
+  closed_states = [];
   g = 0;
   heuristicFunction;
 
@@ -27,6 +28,10 @@ export class AStar {
     return this.fringe;
   }
 
+  getClosedStates(){
+  	return this.closed_states;
+  }
+
   getClosed(){
     console.log("###### CLOSED IS ######");
     console.log(this.closed);
@@ -40,12 +45,6 @@ export class AStar {
       board: this.start
     });
 
-    // console.log("###### FRINGE ######");
-    // console.log(this.fringe);
-    //
-    // console.log("###### CLOSED ######");
-    // console.log(this.closed);
-
     while(!_.isEmpty(this.fringe)) {
       let node = _.head(this.fringe);
       this.fringe = _.tail(this.fringe);
@@ -55,6 +54,8 @@ export class AStar {
           return;
         } else {
           this.closed.push(node);
+          this.closed_states.push([Object.assign([], this.closed)]);
+
           this.g += 1;
           let children = this.children(node.board);
 

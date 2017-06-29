@@ -33,24 +33,41 @@
 
 <h2>Closed:</h2>
 
-<ng-container *ngFor="let closedBoard of getClosed()">
-	<md-card  class="mini">
-		<md-card-title-group>
-			<md-card-title>F = g + h: {{ closedBoard.f }}</md-card-title>
-		</md-card-title-group>
-		<md-card-content>
-			<div class="puzzle-mini">
-				<div class="row" *ngFor="let row of closedRows(closedBoard.board)">
-					<div class="tile-mini" *ngFor="let tile of row" (click)="tileClicked(tile.value)">
-						{{tile.value}}
-					</div>
+<ng-container *ngFor="let closedState of getClosedStates()">
+	<!--<ng-container  >-->
+		<md-card  class="mini">
+			<md-card-title-group>
+				<!--<md-card-title>F = g + h: {{ closedBoard.f }}</md-card-title>-->
+			</md-card-title-group>
+			<md-card-content>
+
+				<!--<pre>{{ closedState | json }}</pre>-->
+				<div *ngFor="let closedBoards of closedState" class="puzzle-mini">
+					<ng-container *ngFor="let closedBoard of closedBoards">
+						<p></p>
+						<p></p>
+						<p>F: {{ closedBoard.f }}</p>
+
+
+						<div class="row" *ngFor="let row of closedRows(closedBoard.board)">
+							<div class="tile-mini" *ngFor="let tile of row">
+								{{tile.value}}
+							</div>
+						</div>
+						<p></p>
+						<p></p>
+						<p>---</p>
+					</ng-container>
+
+
+
+
 				</div>
-				<!--<div class="tile-mini" *ngFor="let tile of closedBoard">-->
-				<!--{{tile.value}}-->
-				<!--</div>-->
-			</div>
-		</md-card-content>
-	</md-card>
+			</md-card-content>
+		</md-card>
+
+	<!--</ng-container>-->
+
 
 </ng-container>
 

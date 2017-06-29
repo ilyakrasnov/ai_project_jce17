@@ -21,7 +21,7 @@ export class PuzzleComponent {
 		{ x: 1, y: 1, value: 1 }, { x: 2, y: 1, value: 2 }, { x: 3, y: 1, value: 3 },
 		{ x: 1, y: 2, value: 4 }, { x: 2, y: 2, value: 8 }, { x: 3, y: 2, value: 5 },
 		{ x: 1, y: 3, value: null }, { x: 2, y: 3, value: 7 }, { x: 3, y: 3, value: 6}
-		];
+	];
 
 	// closed = [
 	// 	{ board: [
@@ -75,6 +75,10 @@ export class PuzzleComponent {
 
 	getClosed(){
 		return this.aStar.getClosed();
+	}
+
+	getClosedStates(){
+		return this.aStar.getClosedStates();
 	}
 
 	finished(){
