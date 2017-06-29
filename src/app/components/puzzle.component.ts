@@ -81,6 +81,10 @@ export class PuzzleComponent {
 		return this.aStar.getClosedStates();
 	}
 
+	getFringeStates(){
+		return this.aStar.getFringeStates();
+	}
+
 	finished(){
 		return this.deepCompare(this.GOAL_STATE, this.board);
 	}

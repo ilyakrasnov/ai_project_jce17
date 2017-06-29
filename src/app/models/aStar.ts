@@ -1,230 +1,252 @@
 import * as _ from "lodash";
 
 export class AStar {
-  goal;
-  movement;
-  dimension;
-  start;
-  fringe = [];
-  closed = [];
-  closed_states = [];
-  g = 0;
-  heuristicFunction;
+	goal;
+	movement;
+	dimension;
+	start;
+	fringe = [];
+	closed = [];
+	fringe_states = [];
+	closed_states = [];
+	g = 0;
+	heuristicFunction;
 
-  readonly HEURISTIC_FUNCITONS = {
-    1: this.nrOfMisplacedTiles,
-    2: this.sumOfManattenDistances
-  }
+	readonly HEURISTIC_FUNCITONS = {
+		1: this.nrOfMisplacedTiles,
+		2: this.sumOfManattenDistances
+	}
 
-  constructor(goal, start, movement, dimension, h = 1) {
-    this.goal = goal;
-    this.movement = movement;
-    this.dimension = dimension;
-    this.heuristicFunction = h;
-    this.start = start;
-  }
+	constructor(goal, start, movement, dimension, h = 1) {
+		this.goal = goal;
+		this.movement = movement;
+		this.dimension = dimension;
+		this.heuristicFunction = h;
+		this.start = start;
+	}
 
-  getFringe(){
-    return this.fringe;
-  }
+	getFringe(){
+		return this.fringe;
+	}
 
-  getClosedStates(){
-  	return this.closed_states;
-  }
+	getClosedStates(){
+		return this.closed_states;
+	}
 
-  getClosed(){
-    console.log("###### CLOSED IS ######");
-    console.log(this.closed);
+	getFringeStates(){
+		return this.fringe_states;
+	}
 
-    return this.closed;
-  }
+	getClosed(){
+		console.log("###### CLOSED IS ######");
+		console.log(this.closed);
 
-  run(){
-    this.pushToFringe({
-      f: this.f(this.start),
-      board: this.start
-    });
+		return this.closed;
+	}
 
-    while(!_.isEmpty(this.fringe)) {
-      let node = _.head(this.fringe);
-      this.fringe = _.tail(this.fringe);
-      if (node) {
-        if (this.goalReached(node)) {
-          console.log(`###### GOAL REACHED AFTER ${this.g} STEPS ######"`);
-          return;
-        } else {
-          this.closed.push(node);
-          this.closed_states.push([Object.assign([], this.closed)]);
+	run(){
+		this.pushToFringe({
+			f: this.f(this.start),
+			g: this.g,
+			h: this.hFunction(this.start),
+			board: this.start
+		});
 
-          this.g += 1;
-          let children = this.children(node.board);
-
-          // TODO sort children by value (number in the tile)
-          console.log("###### GOT CHILDREN ######");
-          console.log(this.fringe);
-
-          for (var child of children) {
-            if (child && this.isNotInClosed(child)) {
-              let f = this.f(child);
-              this.pushToFringe( {
-                board: child,
-                f: f,
-	            g: this.g,
-	            h: this.hFunction(child)
-              });
-            }
-          }
-        }
-      } else {
-        // console.log("###### FRINDGE EMPTY... :( ######");
-      }
-    }
-
-  }
-
-  isNotInClosed(board) {
-    // let check = _.find(this.closed, board);
-    // console.log("###### CHECKING... ######");
-    // console.log(check);
+		this.fringe_states.push([Object.assign([], this.fringe)]);
 
 
-    if (_.find(this.closed, board)) {
-      return false;
-    } else {
-      return true;
-    }
 
-  }
 
-  pushToFringe(node){
-    if(_.isEmpty(this.fringe)) {
-      this.fringe.push(node);
-    } else {
+		while(!_.isEmpty(this.fringe)) {
+			if (this.g > 500) {
+				console.log("###### POSSIBLY THERE IS NO SOLUTION  ######");
+				return;
+			}
+			let node = _.head(this.fringe);
+			this.fringe = _.tail(this.fringe);
+			if (node) {
+				if (this.goalReached(node)) {
+					console.log(`###### GOAL REACHED AFTER ${this.g} STEPS ######"`);
+					return;
+				} else {
+					this.closed.push(node);
+					this.closed_states.push([Object.assign([], this.closed)]);
 
-      let index = _.findIndex(this.fringe, function(nodeInFringe) { return nodeInFringe.f > node.f });
-      if(index == -1){
-        this.fringe.push(node);
-      } else {
-        this.fringe.splice(index, 0, node);
-      }
+					this.g += 1;
+					let children = this.children(node.board);
 
-    }
+					// TODO sort children by value (number in the tile)
+					console.log("###### GOT CHILDREN ######");
+					console.log(this.fringe);
 
-    console.log("###### NEW FRINGE ######");
-    console.log(this.fringe);
-  }
+					for (var child of children) {
+						if (child && !this.isInClosed(child)) {
+							let f = this.f(child);
+							this.pushToFringe( {
+								board: child,
+								f: f,
+								g: this.g,
+								h: this.hFunction(child)
+							});
+						}
+					}
+					this.fringe_states.push([Object.assign([], this.fringe)]);
+				}
+			} else {
+				// console.log("###### FRINDGE EMPTY... :( ######");
+			}
+		}
 
-  f(board){
-    return this.g + this.hFunction(board);
-  }
+	}
 
-  hFunction(board){
+	isInClosed(board) {
 
-    let heuristic = this.HEURISTIC_FUNCITONS[this.heuristicFunction];
-    return heuristic(board, this.goal);
-  }
+		for (var closed_board of this.closed) {
+			if (this.areEqual(closed_board.board, board)){
+				return true;
+			}
+		}
+		return false;
+	}
 
-  nrOfMisplacedTiles(board, goal){
+	areEqual(board1, board2) {
+		for (var tile of board1) {
+			if (!_.find(board2, tile)) {
+				return false;
+			}
+		}
+		return true;
+	}
 
-    let misplaced = 0;
-    for (var tile of board) {
-      if (!_.find(goal, tile)) {
-        misplaced = misplaced + 1;
-      }
-    }
-    if ( board[board.length -1].value !== null) {
-	    misplaced = misplaced - 1;
-    };
-    return misplaced;
-  }
+	pushToFringe(node){
+		if(_.isEmpty(this.fringe)) {
+			this.fringe.push(node);
+		} else {
 
-  sumOfManattenDistances(board){
-    console.log("###### I AM MANHATTEN ######");
-    console.log();
-  }
+			let index = _.findIndex(this.fringe, function(nodeInFringe) { return nodeInFringe.f > node.f });
+			if(index == -1){
+				this.fringe.push(node);
+			} else {
+				this.fringe.splice(index, 0, node);
+			}
 
-  goalReached(node){
-    console.log("###### CHECKING IF REACHED GOAL ######");
-    console.log(node.board);
-    console.log(this.goal);
+		}
 
-    for (var tile of node.board) {
-      if (!_.find(this.goal, tile)) {
-        return false;
-      }
-    }
-    return true;
-  }
+		console.log("###### NEW FRINGE ######");
+		console.log(this.fringe);
+	}
 
-  children(board) {
-    let emptyTile = _.find(board, { value: null});
+	f(board){
+		return this.g + this.hFunction(board);
+	}
 
-    return [
-      this.childUp(board, emptyTile),
-      this.childDown(board, emptyTile),
-      this.childLeft(board, emptyTile),
-      this.childRight(board, emptyTile)
-    ]
-  }
+	hFunction(board){
 
-  private nextState(board, x, y) {
+		let heuristic = this.HEURISTIC_FUNCITONS[this.heuristicFunction];
+		return heuristic(board, this.goal);
+	}
 
-    console.log("###### IN NEXT STATE: ######");
-    console.log(board);
-    console.log(x,y);
+	nrOfMisplacedTiles(board, goal){
 
-    if (this.isOnBoard(x, y)){
-      let value = _.find(board, { x: x, y: y }).value;
+		let misplaced = 0;
+		for (var tile of board) {
+			if (!_.find(goal, tile)) {
+				misplaced = misplaced + 1;
+			}
+		}
+		if ( board[board.length -1].value !== null) {
+			misplaced = misplaced - 1;
+		};
+		return misplaced;
+	}
 
-      let new_board = this.movement.make_move(board, value);
+	sumOfManattenDistances(board){
+		console.log("###### I AM MANHATTEN ######");
+		console.log();
+	}
 
-      return this.movement.make_move(board, value, this.dimension);
-    }
-  }
+	goalReached(node){
+		console.log("###### CHECKING IF REACHED GOAL ######");
+		console.log(node.board);
+		console.log(this.goal);
 
-  private childUp(board, emptyTile) {
-    let new_x = emptyTile.x;
-    let new_y = emptyTile.y - 1;
-    console.log("###### NEW COORDS ######");
-    console.log(new_x, new_y);
+		for (var tile of node.board) {
+			if (!_.find(this.goal, tile)) {
+				return false;
+			}
+		}
+		return true;
+	}
 
-    return this.nextState(board, new_x, new_y);
-  }
+	children(board) {
+		let emptyTile = _.find(board, { value: null});
 
-  private childDown(board, emptyTile) {
-    let new_x = emptyTile.x;
-    let new_y = emptyTile.y + 1;
+		return [
+			this.childUp(board, emptyTile),
+			this.childDown(board, emptyTile),
+			this.childLeft(board, emptyTile),
+			this.childRight(board, emptyTile)
+		]
+	}
 
-    return this.nextState(board, new_x, new_y);
-  }
+	private nextState(board, x, y) {
 
-  private childLeft(board, emptyTile) {
-    let new_x = emptyTile.x - 1;
-    let new_y = emptyTile.y;
+		console.log("###### IN NEXT STATE: ######");
+		console.log(board);
+		console.log(x,y);
 
-    return this.nextState(board, new_x, new_y);
-  }
-  private childRight(board, emptyTile) {
-    let new_x = emptyTile.x + 1;
-    let new_y = emptyTile.y;
+		if (this.isOnBoard(x, y)){
+			let value = _.find(board, { x: x, y: y }).value;
 
-    return this.nextState(board, new_x, new_y);
-  }
+			let new_board = this.movement.make_move(board, value);
 
-  private isOnBoard(x, y) {
-    if (this.withinDimensions(x) && this.withinDimensions(y)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+			return this.movement.make_move(board, value, this.dimension);
+		}
+	}
 
-  private withinDimensions(n) {
-    if (n >= 1 && n <= 3) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+	private childUp(board, emptyTile) {
+		let new_x = emptyTile.x;
+		let new_y = emptyTile.y - 1;
+		console.log("###### NEW COORDS ######");
+		console.log(new_x, new_y);
+
+		return this.nextState(board, new_x, new_y);
+	}
+
+	private childDown(board, emptyTile) {
+		let new_x = emptyTile.x;
+		let new_y = emptyTile.y + 1;
+
+		return this.nextState(board, new_x, new_y);
+	}
+
+	private childLeft(board, emptyTile) {
+		let new_x = emptyTile.x - 1;
+		let new_y = emptyTile.y;
+
+		return this.nextState(board, new_x, new_y);
+	}
+	private childRight(board, emptyTile) {
+		let new_x = emptyTile.x + 1;
+		let new_y = emptyTile.y;
+
+		return this.nextState(board, new_x, new_y);
+	}
+
+	private isOnBoard(x, y) {
+		if (this.withinDimensions(x) && this.withinDimensions(y)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private withinDimensions(n) {
+		if (n >= 1 && n <= 3) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }
