@@ -1,0 +1,73 @@
+<div layout-fill layout="column" layout-align="center none">
+	<div layout="row" layout-align="center none">
+
+		<md-card>
+			<md-card-title-group>
+				<!--<img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>-->
+				<md-card-title>Moves: {{ moves.length }}, Finished:
+					<span ng-class="md-48">
+		                <md-icon  class="green" *ngIf=" finished()">done</md-icon>
+		                <md-icon  class="red" *ngIf="!finished()">clear</md-icon>
+	                </span>{{ finished() }}
+				</md-card-title>
+				<!--<md-card-subtitle *ngIf="subtitle">{{ subtitle | bcEllipsis:40 }}</md-card-subtitle>-->
+			</md-card-title-group>
+			<md-card-content>
+				<div class="puzzle">
+					<div class="row" *ngFor="let row of boardRows()">
+						<div class="tile" *ngFor="let tile of row" (click)="tileClicked(tile.value)">
+							{{tile.value}}
+						</div>
+					</div>
+				</div>
+			</md-card-content>
+		</md-card>
+
+		<button (click)="runAlgorithm()"></button>
+
+	</div>
+</div>
+
+<h2>Fringe:</h2>
+<pre>{{ getFringe().board  | json }}</pre>
+
+<h2>Closed:</h2>
+
+<ng-container *ngFor="let closedBoard of getClosed()">
+	<md-card  class="mini">
+		<md-card-title-group>
+			<md-card-title>F = g + h: {{ closedBoard.f }}</md-card-title>
+		</md-card-title-group>
+		<md-card-content>
+			<div class="puzzle-mini">
+				<div class="row" *ngFor="let row of closedRows(closedBoard.board)">
+					<div class="tile-mini" *ngFor="let tile of row" (click)="tileClicked(tile.value)">
+						{{tile.value}}
+					</div>
+				</div>
+				<!--<div class="tile-mini" *ngFor="let tile of closedBoard">-->
+				<!--{{tile.value}}-->
+				<!--</div>-->
+			</div>
+		</md-card-content>
+	</md-card>
+
+</ng-container>
+
+
+<md-card class="result">
+	<md-card-content>
+		<h2 class="example-h2">Settings</h2>
+
+		<md-slider
+				class="example-margin"
+				[max]="10"
+				[min]="1"
+				[step]="1"
+				[thumb-label]="thumbLabel"
+				[tick-interval]="tickInterval"
+				[value]="3"
+				[vertical]="vertical">
+		</md-slider>
+	</md-card-content>
+</md-card>

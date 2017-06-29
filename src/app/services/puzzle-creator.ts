@@ -7,8 +7,11 @@ import * as _ from "lodash";
 
 
 @Injectable()
-export class PuzzelCreatorService {
+export class PuzzleCreatorService {
 
+  constructor(){
+
+  }
   dimension;
 
   // createPuzzle(dimension) {
