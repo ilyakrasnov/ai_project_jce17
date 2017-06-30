@@ -8,6 +8,7 @@ import { BookAuthorsComponent } from './book-authors';
 import { BookDetailComponent } from './book-detail';
 import { BookPreviewComponent } from './book-preview';
 import { PuzzleComponent } from './puzzle.component';
+import { MiniBoardComponent } from './miniboard.component';
 import { BookSearchComponent } from './book-search';
 import { LayoutComponent } from './layout';
 import { NavItemComponent } from './nav-item';
@@ -22,6 +23,7 @@ export const COMPONENTS = [
   BookDetailComponent,
   BookPreviewComponent,
   PuzzleComponent,
+  MiniBoardComponent,
   BookSearchComponent,
   LayoutComponent,
   NavItemComponent,

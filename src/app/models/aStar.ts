@@ -55,19 +55,20 @@ export class AStar {
 		this.fringe_states.push([Object.assign([], this.fringe)]);
 
 
-
-
 		while(!_.isEmpty(this.fringe)) {
 			if (this.g > 500) {
 				console.log("###### POSSIBLY THERE IS NO SOLUTION  ######");
-				return;
+				return undefined;
 			}
+
+
 			let node = _.head(this.fringe);
 			this.fringe = _.tail(this.fringe);
 			if (node) {
 				if (this.goalReached(node)) {
+
 					console.log(`###### GOAL REACHED AFTER ${this.g} STEPS ######"`);
-					return;
+					return this.g;
 				} else {
 					this.closed.push(node);
 					this.closed_states.push([Object.assign([], this.closed)]);
@@ -93,7 +94,7 @@ export class AStar {
 					this.fringe_states.push([Object.assign([], this.fringe)]);
 				}
 			} else {
-				// console.log("###### FRINDGE EMPTY... :( ######");
+        return undefined;
 			}
 		}
 

@@ -1,109 +1,89 @@
 <div layout-fill layout="column" layout-align="center none">
-	<div layout="row" layout-align="center none">
+  <div layout="row" layout-align="center none">
 
-		<md-card>
-			<md-card-title-group>
-				<!--<img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>-->
-				<md-card-title>Moves: {{ moves.length }}, Finished:
-					<span ng-class="md-48">
-		                <md-icon  class="green" *ngIf=" finished()">done</md-icon>
-		                <md-icon  class="red" *ngIf="!finished()">clear</md-icon>
-	                </span>{{ finished() }}
-				</md-card-title>
-				<!--<md-card-subtitle *ngIf="subtitle">{{ subtitle | bcEllipsis:40 }}</md-card-subtitle>-->
-			</md-card-title-group>
-			<md-card-content>
-				<div class="puzzle">
-					<div class="row" *ngFor="let row of boardRows()">
-						<div class="tile" *ngFor="let tile of row" (click)="tileClicked(tile.value)">
-							{{tile.value}}
-						</div>
-					</div>
-				</div>
-			</md-card-content>
-		</md-card>
+    <md-card>
+      <md-card-title-group>
+        <!--<img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>-->
+        <md-card-title>Moves: {{ moves.length }}, Finished:
+          <span ng-class="md-48">
+            <md-icon  class="green" *ngIf=" finished()">done</md-icon>
+            <md-icon  class="red" *ngIf="!finished()">clear</md-icon>
+          </span>{{ finished() }}
+        </md-card-title>
+        <!--<md-card-subtitle *ngIf="subtitle">{{ subtitle | bcEllipsis:40 }}</md-card-subtitle>-->
+      </md-card-title-group>
+      <md-card-content>
+        <div class="puzzle">
+          <div class="row" *ngFor="let row of boardRows()">
+            <div class="tile" *ngFor="let tile of row" (click)="tileClicked(tile.value)">
+              {{tile.value}}
+            </div>
+          </div>
+        </div>
+      </md-card-content>
+    </md-card>
 
-		<button (click)="runAlgorithm()"></button>
+    <button (click)="runAlgorithm()"></button>
 
-	</div>
+  </div>
 </div>
+
+
 
 <h2>Fringe:</h2>
 <ng-container *ngFor="let fringeState of getFringeStates()">
-	<!--<ng-container  >-->
-	<md-card  class="mini">
-		<md-card-title-group>
-			<!--<md-card-title>F = g + h: {{ closedBoard.f }}</md-card-title>-->
-		</md-card-title-group>
-		<md-card-content>
+  <!--<ng-container  >-->
+  <md-card  class="mini">
+    <md-card-title-group>
+      <!--<md-card-title>F = g + h: {{ closedBoard.f }}</md-card-title>-->
+    </md-card-title-group>
+    <md-card-content>
+      <div *ngFor="let closedBoards of fringeState" class="puzzle-mini">
+        <ng-container *ngFor="let closedBoard of closedBoards">
+          <mini-board [board]="closedBoard"></mini-board>
+        </ng-container>
+      </div>
+    </md-card-content>
+  </md-card>
 
-			<!--<pre>{{ closedState | json }}</pre>-->
-			<div *ngFor="let closedBoards of fringeState" class="puzzle-mini">
-				<ng-container *ngFor="let closedBoard of closedBoards">
-					<p></p>
-					<p></p>
-					<p>F = g + h = {{ closedBoard.g }} + {{ closedBoard.h }}</p>
-					<div class="row" *ngFor="let row of closedRows(closedBoard.board)">
-						<div class="tile-mini" *ngFor="let tile of row">
-							{{tile.value}}
-						</div>
-					</div>
-					<p></p>
-					<p></p>
-					<p>---</p>
-				</ng-container>
-			</div>
-		</md-card-content>
-	</md-card>
-
-	<!--</ng-container>-->
+  <!--</ng-container>-->
 </ng-container>
 
 <h2>Closed:</h2>
 <ng-container *ngFor="let closedState of getClosedStates()">
-	<!--<ng-container  >-->
-		<md-card  class="mini">
-			<md-card-title-group>
-				<!--<md-card-title>F = g + h: {{ closedBoard.f }}</md-card-title>-->
-			</md-card-title-group>
-			<md-card-content>
+  <!--<ng-container  >-->
+  <md-card  class="mini">
+    <md-card-title-group>
+      <!--<md-card-title>F = g + h: {{ closedBoard.f }}</md-card-title>-->
+    </md-card-title-group>
+    <md-card-content>
 
-				<!--<pre>{{ closedState | json }}</pre>-->
-				<div *ngFor="let closedBoards of closedState" class="puzzle-mini">
-					<ng-container *ngFor="let closedBoard of closedBoards">
-						<p></p>
-						<p></p>
-						<p>F = g + h = {{ closedBoard.g }} + {{ closedBoard.h }}</p>
-						<div class="row" *ngFor="let row of closedRows(closedBoard.board)">
-							<div class="tile-mini" *ngFor="let tile of row">
-								{{tile.value}}
-							</div>
-						</div>
-						<p></p>
-						<p></p>
-						<p>---</p>
-					</ng-container>
-				</div>
-			</md-card-content>
-		</md-card>
+      <!--<pre>{{ closedState | json }}</pre>-->
+      <div *ngFor="let closedBoards of closedState" class="puzzle-mini">
+        <ng-container *ngFor="let closedBoard of closedBoards">
+          <mini-board [board]="closedBoard"></mini-board>
+        </ng-container>
+      </div>
+    </md-card-content>
+  </md-card>
 
-	<!--</ng-container>-->
+  <!--</ng-container>-->
 </ng-container>
 
 
 <md-card class="result">
-	<md-card-content>
-		<h2 class="example-h2">Settings</h2>
+  <md-card-content>
+    <h2 class="example-h2">Settings</h2>
 
-		<md-slider
-				class="example-margin"
-				[max]="10"
-				[min]="1"
-				[step]="1"
-				[thumb-label]="thumbLabel"
-				[tick-interval]="tickInterval"
-				[value]="3"
-				[vertical]="vertical">
-		</md-slider>
-	</md-card-content>
+    <md-slider
+        class="example-margin"
+        [max]="10"
+        [min]="1"
+        [step]="1"
+        [thumb-label]="thumbLabel"
+        [tick-interval]="tickInterval"
+        [value]="3"
+        [vertical]="vertical">
+    </md-slider>
+  </md-card-content>
 </md-card>

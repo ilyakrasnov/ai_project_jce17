@@ -6,107 +6,101 @@ import * as book from '../actions/puzzle';
 import * as _ from "lodash";
 import {PuzzleCreatorService} from "../services/puzzle-creator";
 import {AStar} from "../models/aStar";
+import {MdSnackBar} from '@angular/material';
 
 
 @Component({
-	selector: 'puzzle',
-	templateUrl: './puzzle.component.html',
-	styleUrls: ['./puzzle.component.css']
+  selector: 'puzzle',
+  templateUrl: './puzzle.component.html',
+  styleUrls: ['./puzzle.component.css']
 })
 export class PuzzleComponent {
-	DIMENSION = 3;
-	GOAL_STATE = [];
+  DIMENSION = 3;
+  GOAL_STATE = [];
 
-	board = [
-		{ x: 1, y: 1, value: 1 }, { x: 2, y: 1, value: 2 }, { x: 3, y: 1, value: 3 },
-		{ x: 1, y: 2, value: 4 }, { x: 2, y: 2, value: 8 }, { x: 3, y: 2, value: 5 },
-		{ x: 1, y: 3, value: null }, { x: 2, y: 3, value: 7 }, { x: 3, y: 3, value: 6}
-	];
+  board = [
+    { x: 1, y: 1, value: 1 }, { x: 2, y: 1, value: 2 }, { x: 3, y: 1, value: 3 },
+    { x: 1, y: 2, value: 4 }, { x: 2, y: 2, value: 8 }, { x: 3, y: 2, value: 5 },
+    { x: 1, y: 3, value: null }, { x: 2, y: 3, value: 7 }, { x: 3, y: 3, value: 6}
+  ];
 
-	// closed = [
-	// 	{ board: [
-	// 		{ x: 1, y: 1, value: 1 }, { x: 2, y: 1, value: 2 }, { x: 3, y: 1, value: 3 },
-	// 		{ x: 1, y: 2, value: 4 }, { x: 2, y: 2, value: 8 }, { x: 3, y: 2, value: 5 },
-	// 		{ x: 1, y: 3, value: 7 }, { x: 2, y: 3, value: null }, { x: 3, y: 3, value: 6}
-	// 		]
-	// 	},
-	// 	{ board: [
-	// 		{ x: 1, y: 1, value: 1 }, { x: 2, y: 1, value: 2 }, { x: 3, y: 1, value: 3 },
-	// 		{ x: 1, y: 2, value: 4 }, { x: 2, y: 2, value: null }, { x: 3, y: 2, value: 5 },
-	// 		{ x: 1, y: 3, value: 7 }, { x: 2, y: 3, value: 8 }, { x: 3, y: 3, value: 6}
-	// 	]
-	// 	}
-	// 	];
+  moves = [ ];
+  aStar;
 
+  constructor(
+    private movement: MovementService,
+    private puzzleCreator: PuzzleCreatorService,
+    private snackBar: MdSnackBar
+  ) {
+    }
 
+    ngOnInit(){
+      this.initializeBoardAndGoal();
+    }
 
-	moves = [ ];
-	aStar;
+    initializeBoardAndGoal(){
+      // this.board = this.puzzleCreator.createBoard(this.DIMENSION);
+      this.GOAL_STATE = this.puzzleCreator.createGoalState(this.DIMENSION);
+      this.aStar = new AStar(this.GOAL_STATE, this.board, this.movement, this.DIMENSION);
+    }
 
-	constructor(private movement: MovementService,
-				private puzzleCreator: PuzzleCreatorService) {
-	}
+    runAlgorithm(){
+      this.initializeBoardAndGoal();
+      let result = this.aStar.run();
 
-	ngOnInit(){
-		this.initializeBoardAndGoal();
-	}
-	
-	initializeBoardAndGoal(){
-		// this.board = this.puzzleCreator.createBoard(this.DIMENSION);
-		this.GOAL_STATE = this.puzzleCreator.createGoalState(this.DIMENSION);
-		this.aStar = new AStar(this.GOAL_STATE, this.board, this.movement, this.DIMENSION);
-	}
+      if(result){
+        this.snackBar.open(`YEAH.. Reached goal in ${result} steps`, '',{
+          duration: 2000,
+        });
+      }
+    }
 
-	runAlgorithm(){
-		this.aStar.run();
-	}
+    boardRows() {
+      return _.chunk(this.board, this.DIMENSION);
+    }
 
-	boardRows() {
-		return _.chunk(this.board, this.DIMENSION);
-	}
+    closedRows(closedBoard){
+      return _.chunk(closedBoard, this.DIMENSION);
+    }
 
-	closedRows(closedBoard){
-		return _.chunk(closedBoard, this.DIMENSION);
-	}
+    getFringe(){
+      return this.aStar.getFringe();
+    }
 
-	getFringe(){
-		return this.aStar.getFringe();
-	}
+    getClosed(){
+      return this.aStar.getClosed();
+    }
 
-	getClosed(){
-		return this.aStar.getClosed();
-	}
+    getClosedStates(){
+      return this.aStar.getClosedStates();
+    }
 
-	getClosedStates(){
-		return this.aStar.getClosedStates();
-	}
+    getFringeStates(){
+      return this.aStar.getFringeStates();
+    }
 
-	getFringeStates(){
-		return this.aStar.getFringeStates();
-	}
+    finished(){
+      return this.deepCompare(this.GOAL_STATE, this.board);
+    }
 
-	finished(){
-		return this.deepCompare(this.GOAL_STATE, this.board);
-	}
+    tileClicked(tile_number) {
+      let newBoard = this.movement.make_move(this.board, tile_number, this.DIMENSION);
+      this.saveAndMove(newBoard);
+    }
 
-	tileClicked(tile_number) {
-		let newBoard = this.movement.make_move(this.board, tile_number, this.DIMENSION);
-		this.saveAndMove(newBoard);
-	}
+    private saveAndMove(newBoard) {
+      if (newBoard) {
+        this.moves.push(newBoard);
+        this.board = newBoard;
+      }
+    }
 
-	private saveAndMove(newBoard) {
-		if (newBoard) {
-			this.moves.push(newBoard);
-			this.board = newBoard;
-		}
-	}
-
-	private deepCompare(goal, state) {
-		for (var tile of state) {
-			if (!_.find(goal, tile)) {
-				return false;
-			}
-		}
-		return true;
-	}
+    private deepCompare(goal, state) {
+      for (var tile of state) {
+        if (!_.find(goal, tile)) {
+          return false;
+        }
+      }
+      return true;
+    }
 }
