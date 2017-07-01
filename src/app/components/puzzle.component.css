@@ -3,9 +3,21 @@ md-icon{
   height:45px;
   width: 45px;
 }
-.separator {
+
+.miniboard {
+  float: left;
+  margin-right: 25px;
+}
+
+.results-side{
+  float: left;
+  width: 50%;
+}
+
+.algorithm{
 
 }
+
 .tool-tip{
 
   color: #fff;

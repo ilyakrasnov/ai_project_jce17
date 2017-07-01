@@ -1,6 +1,8 @@
-<p>F = g + h = {{ board.g }} + {{ board.h }}</p>
-<div class="row" *ngFor="let row of boardRows()">
-  <div class="tile-mini" *ngFor="let tile of row">
-    {{tile.value}}
+<div class="miniboard">
+  <p>F = g + h = {{ board.g }} + {{ board.h }}</p>
+  <div class="row" *ngFor="let row of boardRows()">
+    <div class="tile-mini" *ngFor="let tile of row">
+      {{tile.value}}
+    </div>
   </div>
 </div>
