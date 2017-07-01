@@ -40,7 +40,7 @@
     <md-card-content>
       <div *ngFor="let closedBoards of fringeState" class="puzzle-mini">
         <ng-container *ngFor="let closedBoard of closedBoards">
-          <mini-board [board]="closedBoard"></mini-board>
+          <miniboard [board]="closedBoard"></miniboard>
         </ng-container>
       </div>
     </md-card-content>
@@ -61,7 +61,7 @@
       <!--<pre>{{ closedState | json }}</pre>-->
       <div *ngFor="let closedBoards of closedState" class="puzzle-mini">
         <ng-container *ngFor="let closedBoard of closedBoards">
-          <mini-board [board]="closedBoard"></mini-board>
+          <miniboard [board]="closedBoard"></miniboard>
         </ng-container>
       </div>
     </md-card-content>
