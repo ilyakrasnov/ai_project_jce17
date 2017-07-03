@@ -1,4 +1,4 @@
-# AI @ACE 2017
+# AI @JCE 2017
 
 #### Prof. Rachel Ben-Eliyahu-Zohary
 
