@@ -19,9 +19,9 @@ export class PuzzleComponent {
   GOAL_STATE = [];
 
   board = [
-    { x: 1, y: 1, value: 1 }, { x: 2, y: 1, value: 2 }, { x: 3, y: 1, value: 3 },
-    { x: 1, y: 2, value: 4 }, { x: 2, y: 2, value: 8 }, { x: 3, y: 2, value: 5 },
-    { x: 1, y: 3, value: null }, { x: 2, y: 3, value: 7 }, { x: 3, y: 3, value: 6}
+    // { x: 1, y: 1, value: 1 }, { x: 2, y: 1, value: 2 }, { x: 3, y: 1, value: 3 },
+    // { x: 1, y: 2, value: 4 }, { x: 2, y: 2, value: 8 }, { x: 3, y: 2, value: 5 },
+    // { x: 1, y: 3, value: null }, { x: 2, y: 3, value: 7 }, { x: 3, y: 3, value: 6}
   ];
 
   moves = [ ];
@@ -39,7 +39,7 @@ export class PuzzleComponent {
     }
 
     initializeBoardAndGoal(){
-      // this.board = this.puzzleCreator.createBoard(this.DIMENSION);
+      this.board = this.puzzleCreator.createBoard(this.DIMENSION);
       this.GOAL_STATE = this.puzzleCreator.createGoalState(this.DIMENSION);
       this.aStar = new AStar(this.GOAL_STATE, this.board, this.movement, this.DIMENSION);
     }

@@ -17,7 +17,7 @@ export class AStar {
 		2: this.sumOfManattenDistances
 	}
 
-	constructor(goal, start, movement, dimension, h = 1) {
+	constructor(goal, start, movement, dimension, h = 2) {
 		this.goal = goal;
 		this.movement = movement;
 		this.dimension = dimension;
@@ -157,10 +157,23 @@ export class AStar {
 		return misplaced;
 	}
 
-	sumOfManattenDistances(board){
-		console.log("###### I AM MANHATTEN ######");
-		console.log();
+	sumOfManattenDistances(board, goal){
+		let _this = this;
+		let sum_of_distances = 0;
+		for (var tile of board) {
+			if (tile.value) {
+				// _this.tileManhattanDistance(goal_tile, tile);
+				let goal_tile = _.find(goal, { value: tile.value });
+				sum_of_distances = sum_of_distances + Math.abs(goal_tile.x - tile.x) + Math.abs(goal_tile.y - tile.y);
+			}
+		}
+
+		return sum_of_distances;
 	}
+
+	// tileManhattanDistance(tile1, tile2){
+	// 	return (Math.abs(tile1.x - tile2.x) + Math.abs(tile1.y + tile2.y));
+	// }
 
 	goalReached(node){
 		console.log("###### CHECKING IF REACHED GOAL ######");
