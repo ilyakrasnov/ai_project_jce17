@@ -8,7 +8,7 @@ import { MovementService } from '../services/movement';
 import {Board} from "../models/board";
 
 
-const times = x => f => {
+export const times = x => f => {
 	if (x > 0) {
 		f()
 		times (x - 1) (f)
@@ -18,13 +18,11 @@ const times = x => f => {
 @Injectable()
 export class PuzzleCreatorService {
 
-	constructor(private movement: MovementService){
-
-	}
-
-
-
+	movement;
 	dimension;
+	constructor(){
+		this.movement = new MovementService();
+	}
 
 	// createPuzzle(dimension) {
 	//   this.dimension = dimension;
@@ -44,10 +42,10 @@ export class PuzzleCreatorService {
 	createBoard(dimension){
 		this.dimension = dimension;
 
-		let range = _.range(1, dimension + 1);
+		let range = _.range(1, this.dimension + 1);
 		let emptyBoard = this.emptyBoard(range);
 
-		let originalBoard = this.createGoalState(dimension);
+		let originalBoard = this.createGoalState();
 
 
 		// return this.randomize1(emptyBoard, dimension);
@@ -55,7 +53,7 @@ export class PuzzleCreatorService {
 	}
 
 	randomize2(board) {
-		let iterations = 20;
+		let iterations = 10;
 
 		let new_board = board;
 		times (iterations)  (() => {
@@ -80,13 +78,13 @@ export class PuzzleCreatorService {
 		return this.movement.make_move(board, value, this.dimension);
 	}
 
-	createGoalState(dimension){
+	createGoalState(){
 		// this.dimension = dimension;
 
-		let range = _.range(1, dimension + 1);
+		let range = _.range(1, this.dimension + 1);
 		let emptyBoard = this.emptyBoard(range);
 
-		let nrOfCells = dimension ** 2;
+		let nrOfCells = this.dimension ** 2;
 		let numbers = _.range(1, nrOfCells).concat([null]);
 		return this.assignNumbersToBoard(numbers, emptyBoard);
 	}

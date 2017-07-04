@@ -6,6 +6,7 @@ import * as book from '../actions/puzzle';
 import * as _ from "lodash";
 import {PuzzleCreatorService} from "../services/puzzle-creator";
 import {AStar} from "../models/aStar";
+import {Stats} from "../models/stats";
 import {MdSnackBar} from '@angular/material';
 
 
@@ -15,7 +16,7 @@ import {MdSnackBar} from '@angular/material';
   styleUrls: ['./puzzle.component.css']
 })
 export class PuzzleComponent {
-  DIMENSION = 3;
+  DIMENSION = 4;
   GOAL_STATE = [];
 
   board = [
@@ -29,8 +30,8 @@ export class PuzzleComponent {
 
   constructor(
     private movement: MovementService,
-    private puzzleCreator: PuzzleCreatorService,
-    private snackBar: MdSnackBar
+    private snackBar: MdSnackBar,
+    private puzzleCreator: PuzzleCreatorService
   ) {
     }
 
@@ -39,12 +40,17 @@ export class PuzzleComponent {
     }
 
     initializeBoardAndGoal(){
+    	// let puzzleCreator = new PuzzleCreatorService(this.DIMENSION);
       this.board = this.puzzleCreator.createBoard(this.DIMENSION);
-      this.GOAL_STATE = this.puzzleCreator.createGoalState(this.DIMENSION);
-      this.aStar = new AStar(this.GOAL_STATE, this.board, this.movement, this.DIMENSION);
+      this.GOAL_STATE = this.puzzleCreator.createGoalState();
+      this.aStar = new AStar(this.GOAL_STATE, this.board);
     }
 
   // this.initializeBoardAndGoal();
+
+	runStats(){
+    	new Stats(this.puzzleCreator).run();
+	}
 
   runAlgorithm(){
       let result = this.aStar.run();

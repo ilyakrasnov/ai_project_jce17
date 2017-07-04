@@ -1,4 +1,5 @@
 import * as _ from "lodash";
+import { MovementService } from '../services/movement';
 
 export class AStar {
 	goal;
@@ -17,10 +18,10 @@ export class AStar {
 		2: this.sumOfManattenDistances
 	}
 
-	constructor(goal, start, movement, dimension, h = 2) {
+	constructor(goal, start, h = 2) {
 		this.goal = goal;
-		this.movement = movement;
-		this.dimension = dimension;
+		this.movement = new MovementService();
+		this.dimension = Math.sqrt(goal.length);
 		this.heuristicFunction = h;
 		this.start = start;
 	}
@@ -52,7 +53,7 @@ export class AStar {
 
 
 		while(!_.isEmpty(this.fringe)) {
-			if (this.g > 500) {
+			if (this.g > 2000) {
 				console.log("###### POSSIBLY THERE IS NO SOLUTION  ######");
 				return;
 			}
@@ -231,7 +232,7 @@ export class AStar {
 	}
 
 	private withinDimensions(n) {
-		if (n >= 1 && n <= 3) {
+		if (n >= 1 && n <= this.dimension) {
 			return true;
 		} else {
 			return false;
