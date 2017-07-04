@@ -44,8 +44,9 @@ export class PuzzleComponent {
       this.aStar = new AStar(this.GOAL_STATE, this.board, this.movement, this.DIMENSION);
     }
 
-    runAlgorithm(){
-      this.initializeBoardAndGoal();
+  // this.initializeBoardAndGoal();
+
+  runAlgorithm(){
       let result = this.aStar.run();
 
       if(result){

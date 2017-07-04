@@ -58,7 +58,7 @@ export class AStar {
 		while(!_.isEmpty(this.fringe)) {
 			if (this.g > 500) {
 				console.log("###### POSSIBLY THERE IS NO SOLUTION  ######");
-				return undefined;
+				return;
 			}
 
 
@@ -191,47 +191,26 @@ export class AStar {
 	}
 
 	private nextState(board, x, y) {
-
-		console.log("###### IN NEXT STATE: ######");
-		console.log(board);
-		console.log(x,y);
-
 		if (this.isOnBoard(x, y)){
 			let value = _.find(board, { x: x, y: y }).value;
-
 			let new_board = this.movement.make_move(board, value);
-
 			return this.movement.make_move(board, value, this.dimension);
 		}
 	}
 
 	private childUp(board, emptyTile) {
-		let new_x = emptyTile.x;
-		let new_y = emptyTile.y - 1;
-		console.log("###### NEW COORDS ######");
-		console.log(new_x, new_y);
-
-		return this.nextState(board, new_x, new_y);
+		return this.nextState(board, emptyTile.x, emptyTile.y - 1);
 	}
 
 	private childDown(board, emptyTile) {
-		let new_x = emptyTile.x;
-		let new_y = emptyTile.y + 1;
-
-		return this.nextState(board, new_x, new_y);
+		return this.nextState(board, emptyTile.x, emptyTile.y + 1);
 	}
 
 	private childLeft(board, emptyTile) {
-		let new_x = emptyTile.x - 1;
-		let new_y = emptyTile.y;
-
-		return this.nextState(board, new_x, new_y);
+		return this.nextState(board, emptyTile.x - 1, emptyTile.y);
 	}
 	private childRight(board, emptyTile) {
-		let new_x = emptyTile.x + 1;
-		let new_y = emptyTile.y;
-
-		return this.nextState(board, new_x, new_y);
+		return this.nextState(board, emptyTile.x + 1, emptyTile.y);
 	}
 
 	private isOnBoard(x, y) {

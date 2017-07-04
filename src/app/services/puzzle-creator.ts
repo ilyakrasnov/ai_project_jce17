@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { Book } from '../models/book';
 import * as _ from "lodash";
 import { MovementService } from '../services/movement';
+import {Board} from "../models/board";
+
 
 const times = x => f => {
 	if (x > 0) {
@@ -40,7 +42,7 @@ export class PuzzleCreatorService {
 	// }
 
 	createBoard(dimension){
-		// this.dimension = dimension;
+		this.dimension = dimension;
 
 		let range = _.range(1, dimension + 1);
 		let emptyBoard = this.emptyBoard(range);
@@ -48,34 +50,35 @@ export class PuzzleCreatorService {
 		let originalBoard = this.createGoalState(dimension);
 
 
-		return this.randomize1(emptyBoard, dimension);
-		// return this.randomize2(originalBoard);
+		// return this.randomize1(emptyBoard, dimension);
+		return this.randomize2(originalBoard);
 	}
 
 	randomize2(board) {
-		console.log("###### GOT BOARD TO RANDOMIZE ######");
-		console.log(board);
+		let iterations = 5;
 
-		let iterations = 10;
-
+		let new_board = board;
 		times (iterations)  (() => {
-			board = Object.assign([], this.makeRandomMove(board));
+			new_board = Object.assign([], this.makeRandomMove(new_board));
 		});
 
-		return board;
+		return new_board;
 	}
 
 	makeRandomMove(board){
-		let values = _.range(1, board.length);
-		let value = _.sample(values);
+		let neighbors = new Board(board).neighbors();
+		let value = _.shuffle(_.compact(neighbors))[0];
 		console.log("###### RANDOM VALUE: ######");
-		console.log(values);
-		return;
+		console.log(value);
+
+		return this.play(board, value);
 	}
 
-	// play(board, value) {
-	// 	return this.movement.make_move(board, value);
-	// }
+
+
+	play(board, value) {
+		return this.movement.make_move(board, value, this.dimension);
+	}
 
 	createGoalState(dimension){
 		// this.dimension = dimension;
