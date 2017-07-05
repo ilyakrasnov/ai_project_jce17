@@ -6,18 +6,13 @@ import {AStar} from './aStar';
 
 export class Stats {
 
-	dimensions = [3,4];
+	dimensions = [5];
 	h_functions = [1,2];
-	iterations = 2;
+	iterations = 1;
 
-	results = [
-		// {
-		// 	board: [],
-		// 	h1: 4,
-		// 	h2: 7
-		// }
-	]
+	results = [	]
 	puzzleCreator;
+
 	constructor(puzzleCreator) {
 		this.puzzleCreator = puzzleCreator;
 	}
@@ -27,19 +22,24 @@ export class Stats {
 			times (this.iterations)  (() => {
 				let result = {
 					board: null,
+					dimension: null,
 					h1: null,
-					h2: null
+					h2: null,
+					time: null
 				};
 				let board = this.puzzleCreator.createBoard(dimension);
-				result = Object.assign({}, result, { board: board });
+				result = Object.assign({}, result, { board, dimension });
 				let goal = this.puzzleCreator.createGoalState();
 				for (var h_func of this.h_functions) {
+					let t0 = performance.now();
 					let aStar = new AStar(board, goal, h_func);
 					let steps = aStar.run();
+					let t1 = performance.now();
+					let time = t1-t0;
 					if (h_func == 1) {
-						result = Object.assign({}, result, { h1: steps });
+						result = Object.assign({}, result, { h1: steps, time });
 					} else {
-						result = Object.assign({}, result, { h2: steps });
+						result = Object.assign({}, result, { h2: steps, time });
 					}
 				}
 				this.results.push(result);

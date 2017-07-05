@@ -53,7 +53,7 @@ export class PuzzleCreatorService {
 	}
 
 	randomize2(board) {
-		let iterations = 10;
+		let iterations = 20;
 
 		let new_board = board;
 		times (iterations)  (() => {

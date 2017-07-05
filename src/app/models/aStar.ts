@@ -53,7 +53,7 @@ export class AStar {
 
 
 		while(!_.isEmpty(this.fringe)) {
-			if (this.g > 2000) {
+			if (this.g > 5000) {
 				console.log("###### POSSIBLY THERE IS NO SOLUTION  ######");
 				return;
 			}
@@ -72,10 +72,6 @@ export class AStar {
 
 					this.g += 1;
 					let children = this.children(node.board);
-
-					// TODO sort children by value (number in the tile)
-					console.log("###### GOT CHILDREN ######");
-					console.log(this.fringe);
 
 					for (var child of children) {
 						if (child && !this.isInClosed(child)) {
@@ -129,9 +125,6 @@ export class AStar {
 			}
 
 		}
-
-		console.log("###### NEW FRINGE ######");
-		console.log(this.fringe);
 	}
 
 	f(board){
