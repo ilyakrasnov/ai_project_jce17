@@ -53,7 +53,7 @@ export class AStar {
 
 
 		while(!_.isEmpty(this.fringe)) {
-			if (this.g > 5000) {
+			if (this.g > 15000) {
 				console.log("###### POSSIBLY THERE IS NO SOLUTION  ######");
 				return;
 			}
