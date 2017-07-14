@@ -9,6 +9,7 @@ export class Stats {
 	dimensions = [3,4];
 	h_functions = [1,2];
 	iterations = 1;
+	randomize_degrees = [5, 10];
 
 	results = [	]
 	puzzleCreator;
@@ -18,33 +19,37 @@ export class Stats {
 	}
 
 	run(){
-		for (var dimension of this.dimensions) {
-			times (this.iterations)  (() => {
-				let result = {
-					board: null,
-					dimension: null,
-					h1: null,
-					h2: null,
-					time: null
-				};
-				let board = this.puzzleCreator.createBoard(dimension);
-				result = Object.assign({}, result, { board, dimension });
-				let goal = this.puzzleCreator.createGoalState();
-				for (var h_func of this.h_functions) {
-					let t0 = performance.now();
-					let aStar = new AStar(board, goal, h_func);
-					let steps = aStar.run();
-					let t1 = performance.now();
-					let time = t1-t0;
-					if (h_func == 1) {
-						result = Object.assign({}, result, { h1: steps, time });
-					} else {
-						result = Object.assign({}, result, { h2: steps, time });
+		for (var rand_degree of this.randomize_degrees){
+			for (var dimension of this.dimensions) {
+				times (this.iterations)  (() => {
+					let result = {
+						board: null,
+						dimension: null,
+						rand_degree: rand_degree,
+						h1: null,
+						h2: null,
+						time: null
+					};
+					let board = this.puzzleCreator.createBoard(dimension, rand_degree);
+					result = Object.assign({}, result, { board, dimension });
+					let goal = this.puzzleCreator.createGoalState();
+					for (var h_func of this.h_functions) {
+						let t0 = performance.now();
+						let aStar = new AStar(board, goal, h_func);
+						let steps = aStar.run();
+						let t1 = performance.now();
+						let time = t1-t0;
+						if (h_func == 1) {
+							result = Object.assign({}, result, { h1: steps, h1_time: time });
+						} else {
+							result = Object.assign({}, result, { h2: steps, h2_time: time });
+						}
 					}
-				}
-				this.results.push(result);
-			});
+					this.results.push(result);
+				});
+			}
 		}
+
 		console.log("###### RESULTS ######");
 		console.log(this.results);
 

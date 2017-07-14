@@ -39,7 +39,7 @@ export class PuzzleCreatorService {
 	//   return [board, goalState];
 	// }
 
-	createBoard(dimension){
+	createBoard(dimension, iterations = 10){
 		this.dimension = dimension;
 
 		let range = _.range(1, this.dimension + 1);
@@ -49,11 +49,13 @@ export class PuzzleCreatorService {
 
 
 		// return this.randomize1(emptyBoard, dimension);
-		return this.randomize2(originalBoard);
+		return this.randomize2(originalBoard, iterations);
 	}
 
-	randomize2(board) {
-		let iterations = 20;
+	// Start with the goal state and make only valid moves,
+	// while not moving the same tile twice in a row
+	randomize2(board, iterations = 10) {
+		// let iterations = 10;
 
 		let new_board = board;
 		let moved_tile = null;
