@@ -54,7 +54,7 @@ export class AStar {
 
 		while(!_.isEmpty(this.fringe)) {
 			if (this.g > 5000) {
-				console.log("###### POSSIBLY THERE IS NO SOLUTION  ######");
+				// console.log("###### POSSIBLY THERE IS NO SOLUTION  ######");
 				return;
 			}
 
@@ -64,7 +64,7 @@ export class AStar {
 			if (node) {
 				if (this.goalReached(node)) {
 
-					console.log(`###### GOAL REACHED AFTER ${this.g} STEPS ######"`);
+					// console.log(`###### GOAL REACHED AFTER ${this.g} STEPS ######"`);
 					return this.g;
 				} else {
 					this.closed.push(node);
@@ -170,9 +170,9 @@ export class AStar {
 	// }
 
 	goalReached(node){
-		console.log("###### CHECKING IF REACHED GOAL ######");
-		console.log(node.board);
-		console.log(this.goal);
+		// console.log("###### CHECKING IF REACHED GOAL ######");
+		// console.log(node.board);
+		// console.log(this.goal);
 
 		for (var tile of node.board) {
 			if (!_.find(this.goal, tile)) {

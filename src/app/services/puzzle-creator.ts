@@ -72,8 +72,8 @@ export class PuzzleCreatorService {
 		let shuffled = _.shuffle(_.compact(neighbors));
 		let value = shuffled[0] == last_moved ? shuffled[1] : shuffled[0];
 
-		console.log("###### RANDOM VALUE: ######");
-		console.log(value);
+		// console.log("###### RANDOM VALUE: ######");
+		// console.log(value);
 
 		return [this.play(board, value), value];
 	}
