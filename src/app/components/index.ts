@@ -11,6 +11,7 @@ import { PuzzleComponent } from './puzzle.component';
 import { MiniboardComponent } from './miniboard.component';
 import { BookSearchComponent } from './book-search';
 import { LayoutComponent } from './layout';
+import { StatsComponent } from './stats.component'
 import { NavItemComponent } from './nav-item';
 import { SidenavComponent } from './sidenav';
 import { ToolbarComponent } from './toolbar';
@@ -24,6 +25,7 @@ export const COMPONENTS = [
   BookPreviewComponent,
   PuzzleComponent,
   MiniboardComponent,
+    StatsComponent,
   BookSearchComponent,
   LayoutComponent,
   NavItemComponent,
