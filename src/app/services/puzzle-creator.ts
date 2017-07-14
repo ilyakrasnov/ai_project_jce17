@@ -56,20 +56,24 @@ export class PuzzleCreatorService {
 		let iterations = 20;
 
 		let new_board = board;
+		let moved_tile = null;
+
 		times (iterations)  (() => {
-			new_board = Object.assign([], this.makeRandomMove(new_board));
+			[new_board, moved_tile]  = Object.assign([], this.makeRandomMove(new_board, moved_tile));
 		});
 
 		return new_board;
 	}
 
-	makeRandomMove(board){
+	makeRandomMove(board, last_moved){
 		let neighbors = new Board(board).neighbors();
-		let value = _.shuffle(_.compact(neighbors))[0];
+		let shuffled = _.shuffle(_.compact(neighbors));
+		let value = shuffled[0] == last_moved ? shuffled[1] : shuffled[0];
+
 		console.log("###### RANDOM VALUE: ######");
 		console.log(value);
 
-		return this.play(board, value);
+		return [this.play(board, value), value];
 	}
 
 

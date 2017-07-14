@@ -6,7 +6,7 @@ import {AStar} from './aStar';
 
 export class Stats {
 
-	dimensions = [6];
+	dimensions = [3,4];
 	h_functions = [1,2];
 	iterations = 1;
 
