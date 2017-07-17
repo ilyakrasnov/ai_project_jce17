@@ -25,20 +25,22 @@ export class Stats {
 				let iter = 0;
 				times (this.iterations)  (() => {
 					iter +=1;
-					let result = {
-						// board: null,
-						dimension: null,
-						rand_degree: rand_degree,
-						h1: {},
-						h2: {}
-					};
+
 					let board = this.puzzleCreator.createBoard(dimension, rand_degree);
 					// result = Object.assign({}, result, { board, dimension });
-					result = Object.assign({}, result, { dimension });
 					let goal = this.puzzleCreator.createGoalState();
 					for (var h_func of this.h_functions) {
-						console.log(`###### RAND(${rand_degree}): h${h_func} for dim: ${dimension},  iteration: ${iter} ######`);
+						let result = {
+							board: null,
+							dimension: null,
+							rand_degree: rand_degree,
+							heuristic: null,
+							time: null,
+							steps: null
+						};
+						// result = Object.assign({}, result, { dimension });
 
+						console.log(`###### RAND(${rand_degree}): iteration: ${iter}, h${h_func} for dim: ${dimension}   ######`);
 
 						let t0 = performance.now();
 						let aStar = new AStar(board, goal, h_func);
@@ -46,12 +48,12 @@ export class Stats {
 						let t1 = performance.now();
 						let time = t1-t0;
 						if (h_func == 1) {
-							result = Object.assign({}, result, { h1: { steps, time } });
+							result = Object.assign({}, result, { heuristic: 1, steps, time, dimension, board } );
 						} else {
-							result = Object.assign({}, result, { h2: { steps,  time } });
+							result = Object.assign({}, result, { heuristic: 2, steps, time, dimension, board } );
 						}
+						this.results.push(result);
 					}
-					this.results.push(result);
 				});
 			}
 		}
