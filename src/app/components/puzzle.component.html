@@ -1,15 +1,12 @@
-<div layout-fill layout="column" layout-align="center none">
-  <div layout="row" layout-align="center none">
+<div layout-fill layout="row" layout-align="center center">
+  <div layout="row" layout-align="center center">
 
     <md-card>
       <md-card-title-group>
-        <!--<img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>-->
-        <md-card-title>Moves: {{ moves.length }}, Finished:
-          <span ng-class="md-48">
-            <md-icon  class="green" *ngIf=" finished()">done</md-icon>
-            <md-icon  class="red" *ngIf="!finished()">clear</md-icon>
-          </span>{{ finished() }}
+        <md-card-title>Puzzle to Solve
         </md-card-title>
+        <!--<img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>-->
+
         <!--<md-card-subtitle *ngIf="subtitle">{{ subtitle | bcEllipsis:40 }}</md-card-subtitle>-->
       </md-card-title-group>
       <md-card-content>
@@ -23,74 +20,125 @@
       </md-card-content>
     </md-card>
 
-    <button (click)="runAlgorithm()">Run algorithm</button>
-    <button (click)="runStats()">Run stats</button>
+    <md-card>
+      <md-card-title-group>
+        <!--<img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>-->
+        <md-card-title>Settings
+        </md-card-title>
+        <!--<md-card-subtitle *ngIf="subtitle">{{ subtitle | bcEllipsis:40 }}</md-card-subtitle>-->
+      </md-card-title-group>
+      <md-card-content>
+        <md-select  placeholder="Dimension">
+         <md-option *ngFor="let dimension of [3,4,5]" [value]="dimension">{{ dimension }}</md-option>
+      </md-select>
+      </md-card-content>
+      <md-card-actions>
+        <button md-raised-button (click)="initializeBoardAndGoal()">Randomize Puzzle</button>
+      </md-card-actions>
+    </md-card>
+    <md-card>
+      <md-card-title-group>
+        <!--<img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>-->
+        <md-card-title>Your Moves: {{ moves.length }}, Finished:
+          <span ng-class="md-48">
+            <md-icon  class="green" *ngIf=" finished()">done</md-icon>
+            <md-icon  class="red" *ngIf="!finished()">clear</md-icon>
+          </span>
+        </md-card-title>
+        <!--<md-card-subtitle *ngIf="subtitle">{{ subtitle | bcEllipsis:40 }}</md-card-subtitle>-->
+      </md-card-title-group>
+      <md-card-content>
+        <p></p>
+        <p>  </p>
+      </md-card-content>
+      <md-card-actions>
+        <button md-raised-button (click)="runAlgorithm()">Find algorithmic solution</button>
+      </md-card-actions>
+    </md-card>
+
+
+
+
 
   </div>
 </div>
 
 
 <div class="algorithm">
-    <div class="results-side"><h2>Closed:</h2>
-        <ng-container *ngFor="let closedState of getClosedStates()">
-            <!--<ng-container  >-->
-            <md-card  class="mini">
-                <md-card-title-group>
-                    <!--<md-card-title>F = g + h: {{ closedBoard.f }}</md-card-title>-->
-                </md-card-title-group>
-                <md-card-content>
+  <div >
+    <ng-container *ngFor="let closedState of getClosedStates(); let i = index">
+      <!--<ng-container  >-->
+      <!--<pre>{{ closedState | json }}</pre>-->
+      <div *ngFor="let closedBoards of closedState">
+        <md-toolbar color="primary">Step: {{ i }}</md-toolbar>
 
-                    <!--<pre>{{ closedState | json }}</pre>-->
-                    <div *ngFor="let closedBoards of closedState" class="puzzle-mini">
-                        <ng-container *ngFor="let closedBoard of closedBoards">
-                            <miniboard [board]="closedBoard"></miniboard>
-                        </ng-container>
-                    </div>
-                </md-card-content>
-            </md-card>
+        <div layout="horizontal">
 
-            <!--</ng-container>-->
-        </ng-container></div>
+        <md-card   class="mini">
+          <md-card-title-group>
+            <md-card-title>Closed</md-card-title>
+          </md-card-title-group>
+          <md-card-content>
+            <ng-container *ngFor="let closedBoard of closedBoards">
+              <miniboard [board]="closedBoard"></miniboard>
+            </ng-container>
+          </md-card-content>
+        </md-card>
+
+        <md-card  class="mini">
+          <md-card-title-group>
+            <md-card-title>Fringe</md-card-title>
+            <!--<md-card-title>F = g + h: {{ closedBoard.f }}</md-card-title>-->
+          </md-card-title-group>
+          <md-card-content>
+            <ng-container *ngFor="let fringeBoard of getFringeStates(i)">
+              <miniboard [board]="fringeBoard"></miniboard>
+            </ng-container>
+          </md-card-content>
+        </md-card>
+
+      </div>
+
+
+
+      </div>
+
+  <!--  </ng-container></div>
     <div class="results-side"><h2>Fringe:</h2>
-        <ng-container *ngFor="let fringeState of getFringeStates()">
-            <!--<ng-container  >-->
-            <md-card  class="mini">
-                <md-card-title-group>
-                    <!--<md-card-title>F = g + h: {{ closedBoard.f }}</md-card-title>-->
-                </md-card-title-group>
-                <md-card-content>
-                    <div *ngFor="let closedBoards of fringeState" class="puzzle-mini">
-                        <ng-container *ngFor="let closedBoard of closedBoards">
-                            <miniboard [board]="closedBoard"></miniboard>
-                        </ng-container>
-                    </div>
-                </md-card-content>
-            </md-card>
+      <ng-container *ngFor="let fringeState of getFringeStates()">
+        <md-card  class="mini">
+          <md-card-title-group>
+          </md-card-title-group>
+          <md-card-content>
+            <div *ngFor="let closedBoards of fringeState" class="puzzle-mini">
+              <ng-container *ngFor="let closedBoard of closedBoards">
+                <miniboard [board]="closedBoard"></miniboard>
+              </ng-container>
+            </div>
+          </md-card-content>
+        </md-card>
 
-            <!--</ng-container>-->
-        </ng-container>
+      </ng-container>
     </div>
-</div>
+  </div> -->
 
 
 
 
 
-
-
-<!--<md-card class="result">-->
+  <!--<md-card class="result">-->
   <!--<md-card-content>-->
-    <!--<h2 class="example-h2">Settings</h2>-->
+  <!--<h2 class="example-h2">Settings</h2>-->
 
-    <!--<md-slider-->
-        <!--class="example-margin"-->
-        <!--[max]="10"-->
-        <!--[min]="1"-->
-        <!--[step]="1"-->
-        <!--[thumb-label]="thumbLabel"-->
-        <!--[tick-interval]="tickInterval"-->
-        <!--[value]="3"-->
-        <!--[vertical]="vertical">-->
-    <!--</md-slider>-->
+  <!--<md-slider-->
+  <!--class="example-margin"-->
+  <!--[max]="10"-->
+  <!--[min]="1"-->
+  <!--[step]="1"-->
+  <!--[thumb-label]="thumbLabel"-->
+  <!--[tick-interval]="tickInterval"-->
+  <!--[value]="3"-->
+  <!--[vertical]="vertical">-->
+  <!--</md-slider>-->
   <!--</md-card-content>-->
-<!--</md-card>-->
+  <!--</md-card>-->

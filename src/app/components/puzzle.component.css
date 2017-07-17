@@ -9,6 +9,18 @@ md-icon{
   margin-right: 25px;
 }
 
+.mat-card{
+  float:left;
+  width: 40%;
+}
+.mini {
+  float: left;
+  display: inline-block;
+   width: 40%;
+   margin: 20px;
+   vertical-align: top;
+}
+
 .results-side{
   float: left;
   width: 50%;

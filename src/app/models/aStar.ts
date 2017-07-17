@@ -34,15 +34,25 @@ export class AStar {
 		return this.closed_states;
 	}
 
-	getFringeStates(){
-		return this.fringe_states;
+	getFringeStates(i){
+		console.log(this.fringe_states);
+		return this.fringe_states[i][0];
 	}
 
 	getClosed(){
 		return this.closed;
 	}
 
+	clearState(){
+		this.g = 0;
+		this.fringe = [];
+		this.closed = [];
+		this.fringe_states = [];
+		this.closed_states = [[]];
+	}
+
 	run(){
+		this.clearState();
 		this.pushToFringe({
 			f: this.f(this.start),
 			g: this.g,

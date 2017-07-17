@@ -16,7 +16,7 @@ import {MdSnackBar} from '@angular/material';
   styleUrls: ['./puzzle.component.css']
 })
 export class PuzzleComponent {
-  DIMENSION = 4;
+  @Input() DIMENSION = 3;
   GOAL_STATE = [];
 
   board = [
@@ -57,7 +57,7 @@ export class PuzzleComponent {
 
       if(result){
         this.snackBar.open(`YEAH.. Reached goal in ${result} steps`, '',{
-          duration: 2000,
+          duration: 5000,
         });
       }
     }
@@ -82,8 +82,9 @@ export class PuzzleComponent {
       return this.aStar.getClosedStates();
     }
 
-    getFringeStates(){
-      return this.aStar.getFringeStates();
+    getFringeStates(i){
+      console.log("i: ",i)
+      return this.aStar.getFringeStates(i);
     }
 
     finished(){
