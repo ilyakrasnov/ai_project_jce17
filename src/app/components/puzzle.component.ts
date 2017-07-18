@@ -16,7 +16,10 @@ import {MdSnackBar} from '@angular/material';
   styleUrls: ['./puzzle.component.css']
 })
 export class PuzzleComponent {
-  @Input() DIMENSION = 3;
+  dimension = 3;
+  newDimension = 3;
+  newRandDegree = 5;
+  randDegrees = _.range(31);
   GOAL_STATE = [];
 
   board = [
@@ -40,8 +43,9 @@ export class PuzzleComponent {
     }
 
     initializeBoardAndGoal(){
-    	// let puzzleCreator = new PuzzleCreatorService(this.DIMENSION);
-      this.board = this.puzzleCreator.createBoard(this.DIMENSION);
+      this.dimension = this.newDimension;
+    	// let puzzleCreator = new PuzzleCreatorService(this.dimension);
+      this.board = this.puzzleCreator.createBoard(this.dimension, this.newRandDegree);
       this.GOAL_STATE = this.puzzleCreator.createGoalState();
       this.aStar = new AStar(this.GOAL_STATE, this.board);
     }
@@ -63,11 +67,11 @@ export class PuzzleComponent {
     }
 
     boardRows() {
-      return _.chunk(this.board, this.DIMENSION);
+      return _.chunk(this.board, this.dimension);
     }
 
     closedRows(closedBoard){
-      return _.chunk(closedBoard, this.DIMENSION);
+      return _.chunk(closedBoard, this.dimension);
     }
 
     getFringe(){
@@ -92,7 +96,7 @@ export class PuzzleComponent {
     }
 
     tileClicked(tile_number) {
-      let newBoard = this.movement.make_move(this.board, tile_number, this.DIMENSION);
+      let newBoard = this.movement.make_move(this.board, tile_number, this.dimension);
       this.saveAndMove(newBoard);
     }
 

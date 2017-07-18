@@ -28,9 +28,14 @@
         <!--<md-card-subtitle *ngIf="subtitle">{{ subtitle | bcEllipsis:40 }}</md-card-subtitle>-->
       </md-card-title-group>
       <md-card-content>
-        <md-select  placeholder="Dimension">
-         <md-option *ngFor="let dimension of [3,4,5]" [value]="dimension">{{ dimension }}</md-option>
-      </md-select>
+        <md-select  placeholder="Dimension" [(ngModel)]="newDimension" >
+          <md-option *ngFor="let dimension of [3,4,5]" [value]="dimension">{{ dimension }}</md-option>
+        </md-select>
+
+
+      <md-select  placeholder="Degree of Randomization" [(ngModel)]="newRandDegree" >
+          <md-option *ngFor="let rand of randDegrees" [value]="rand">{{ rand }}</md-option>
+        </md-select>
       </md-card-content>
       <md-card-actions>
         <button md-raised-button (click)="initializeBoardAndGoal()">Randomize Puzzle</button>

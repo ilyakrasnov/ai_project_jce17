@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -37,6 +38,7 @@ import { schema } from './db';
   imports: [
     CommonModule,
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
     ComponentsModule,
