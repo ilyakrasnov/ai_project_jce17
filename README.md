@@ -87,12 +87,21 @@ In order to collect the data, we created the *Stats* class, which defines the se
 One of the intersting and challenging aspects we faced was randomization of the board when generating the puzzle. Further we discuss the 2 approaches we took and the reasons why we decided to finally use only one of them.
 
 #### Approach 1
-Our first approach was to create a board of a given dimension, i.e. 3x3, 4x4, etc, and  
+Our first approach was to create a board of a given dimension *d*, i.e. 3x3, 4x4, etc, and randomly assigning numbers from *1 to d<sup> 2</sup> - 1*, leaving one tile empty. However not each randomly created puzzle is solvable. As discussed [here](https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html), there is an algorithm to check if a particular board setup is sovable. Using the described algoritm to determine solvability we then only generated solvable puzzles.
 
-As disussed [here](https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html), there is 
+As we will see in later discussions, a particular setup, though being theoretically solvable, may take a lot of steps/time for the algorithm to actually find a solution. 
 
+This approach turned out to be challenging for following reasons:
+
+* The user would wait for a long time when generating the algorithmic solution
+* Testing the *A** algorithm during the development process became long and unpredictable
+
+We then decided to try another approach, with several advantages over the first one.
 
 #### Approach 2
+The second approach was to take the goal state of the puzzle and make a number of valid moves. In each step of the process we know the possible moves we can make, i.e. the tiles we can move. By randomly picking one of them we could randomize the puzzle in each step, always knowing how many steps at most the current board is far from the goal state.
+
+A refinement we also implemented was to prohibiting a tile from being moved twice in a row, thus returning to the same state after two consecutive moves. This distinction helped us to reliably create a randomized boards and also introduced another dimension of measurement, we previously were not intending of measuring, the *degree of randomization*.
 
 
 ## 2 - Implementing the A* algorithm
