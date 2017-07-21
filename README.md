@@ -2,7 +2,11 @@
 ## Overview
 
 * 8 puzzle
+
+    8 puzzel - image 1 - start state and goal state
+    
 * A* search 
+
 * different heuristic functions
 
 ## Problem description
