@@ -23,12 +23,16 @@ Optimal means - the solution found is the optimal, in our case - minimal number 
 
 **Fringe and closed-
 
----image fringe and closed
+
 A Search algortion uses 2 basic lists for calculating the next step. Fringe and Closed
 Fringe holds the next possible steps- or expanded steps. and Closed are states that were already chosen in the path to solving the problem.
 A sucsessor function expands a node, finding what are the next possible steps . 
 the descition of what goes into the list and in what ordere depends on the Search algorithem.
 
+
+![alt text](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/img_visualizing_fring_closed.PNG)
+    
+ 
  Image fringe.
  Image fringe state and closed state.
  
