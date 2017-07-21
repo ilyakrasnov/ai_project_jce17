@@ -3,16 +3,20 @@
 
 * 8 puzzle
 
-    8 puzzel - game is  start state and goal state
-    *** image 1 start and goal state.
+    **8 puzzel - game**
+    In 8 puzzel game the goal is to reorder tiels from a start state to the goal state
     
+    ![alt text](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/img_1_start_and_stop_states.PNG)
+    
+       
     
     When trying to implement an algorithem for solving 8 puzzel - the main considiration is to choose what is the next step, what tile to move on board. this would determine if we are getting closer to the goal or not.
-     - - - ***image 2 tree**
+![alt text](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/img_2_successors.PNG)
+    
 The problem of 8 puzzel, can be presented as a Graph **Search problem**. 
+
 There are diffrent scemes of graph searching  possible, some are compleate , some give optimal results.
-
-
+* Complete and Optimal  sotions.
 The 8 puzzel problem could not always be solved, there are start states that don't have a solution.
 Compleate means if there is a solution the algorithem would find one.
 Optimal means - the solution found is the optimal, in our case - minimal number of steps taken to solve the puzzel.
