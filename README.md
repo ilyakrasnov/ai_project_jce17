@@ -17,6 +17,9 @@ The 8 puzzel problem could not always be solved, there are start states that don
 Compleate means if there is a solution the algorithem would find one.
 Optimal means - the solution found is the optimal, in our case - minimal number of steps taken to solve the puzzel.
 
+**Fringe and closed-
+
+---image fringe and closed
         
 * A* search 
  
@@ -62,6 +65,9 @@ We chose two diffrent heruristic functions and explored the diffrence in perform
 *** image from slide - h1 , h2 
 
 ### Challenges
+it was not easy to implemet, there are many "moving parts" and there were many adjustments and corrections needed. 
+we used Visualization of the algorithem working displaying each step displaying the Fringe states, and Closed states. thies helped understanding what the algorithem was  acctualy doing and what corrections were requiered. 
+
 
 ## 3 - Exploration of A* performance with different heuristic functions
 
