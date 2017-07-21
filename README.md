@@ -17,6 +17,7 @@ The problem of 8 puzzel, can be presented as a Graph **Search problem**.
 
 There are diffrent scemes of graph searching  possible, some are compleate , some give optimal results.
 * Complete and Optimal  sotions.
+
 The 8 puzzel problem could not always be solved, there are start states that don't have a solution.
 Compleate means if there is a solution the algorithem would find one.
 Optimal means - the solution found is the optimal, in our case - minimal number of steps taken to solve the puzzel.
@@ -30,9 +31,6 @@ A sucsessor function expands a node, finding what are the next possible steps .
 the descition of what goes into the list and in what ordere depends on the Search algorithem.
 
 
-![alt text](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/img_visualizing_fring_closed.PNG)
-    
- 
  Image fringe.
  Image fringe state and closed state.
  
@@ -126,6 +124,9 @@ it was not easy to implemet, there are many "moving parts" and there were many a
 we used Visualization of the algorithem working displaying each step displaying the Fringe states, and Closed states. thies helped understanding what the algorithem was  acctualy doing and what corrections were requiered. 
 
 
+![alt text](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/img_visualizing_fring_closed.PNG)
+    
+ 
 ## 3 - Exploration of A* performance with different heuristic functions
 
 ### Experiment setup
