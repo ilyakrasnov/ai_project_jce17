@@ -6,10 +6,10 @@ import {AStar} from './aStar';
 
 export class Stats {
 
-	dimensions = [3, 4, 5];
+	dimensions = [5, 4, 3];
 	h_functions = [1,2];
-	iterations = 10;
-	randomize_degrees = [5, 10, 15];
+	iterations = 50;
+	randomize_degrees = [15, 10, 5];
 
 	results = [	]
 	puzzleCreator;
@@ -53,6 +53,7 @@ export class Stats {
 							result = Object.assign({}, result, { heuristic: 2, steps, time, dimension, board } );
 						}
 						this.results.push(result);
+						console.log(`Iteration took ${time / 1000 / 60} minutes`)
 					}
 				});
 			}
