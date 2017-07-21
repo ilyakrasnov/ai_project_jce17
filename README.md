@@ -1,8 +1,6 @@
 
 ## Overview
 
-
-
 * 8 puzzle
 * A* search 
 * different heuristic functions
@@ -23,8 +21,14 @@ The project consisted of a few parts.
 
 
 ## 2 - Implementing the A* algorithm
+A* algorithem, uses Best First Search approch to go over a graph, from a starting state getting to a Goal state.
+A* uses a huristic function to decide what is the next step.
+F(n) = g(n) + h(n)  - (g(n) number of steps done until this point, h(n) a heiristic assumption how many more steps until goal state reached)
+We chose two diffrent heruristic functions and explored the diffrence in performance counting number of steps, and time.
 
-### h1
+
+### h1 - Number of misplased tiles
+    Counting the number of misplaced tiles, was
 
 ### h2
 
