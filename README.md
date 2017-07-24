@@ -66,6 +66,8 @@ The [online game](http://ngdeploy.ilyakrasnov.s3-website-us-west-2.amazonaws.com
 
 The source code is accessible in this [GitHub repository](https://github.com/ilyakrasnov/ai_project_jce17). We used [AWS Codepipeline](https://aws.amazon.com/codepipeline/) and [AWS Codebuild](https://aws.amazon.com/codebuild/) to automate the build and deployment process of the application. 
 
+Further data analysis was performed using an iPython notebook and data and vizualisation libraries like Pandas, Numpy and Seaborn.
+
 ### Architecture Overview
 The game and later the algorithm were developed using Object Oriented Design for better structure and code reusability. Since it was not the main subject of this project, we only present here basic classes and their responsibilities briefly.
 
@@ -144,10 +146,51 @@ We used *Logging* and *Visualization* of the working algorithm displaying each s
 ## 3 - Exploration of A* performance with different heuristic functions
 
 ### Experiment setup
+The goal of the experiment was to compare how different heuristic functions perform for different puzzle dimension and different degrees of randomization. Following variables were introduced:
+
+* `dimensions: [ 3, 4, 5 ]`
+* `rand_degrees: [ 5, 10, 15 ]`
+* `iterations: 100`
+* `heuristic_functions: [ h1, h2 ]`
+
+
 
 ### Collecting the data
 
+#### Pseudocode for Data Collection
+
+```
+results = []
+
+for (dimension of dimensions) {
+	for (rand_degree of rand_degrees) {
+		do iterations times {
+		
+			// Setup
+			puzzle = create_randomized_puzzle(dimension, rand_degree)
+			
+			// Run
+			steps1, time1 = aStar.run(puzzle, h1)
+			steps2, time2 = aStar.run(puzzle, h2)
+			
+			// Record
+			results.push({ dimension, rand_degree, steps1, time1 })
+			results.push({ dimension, rand_degree, steps2, time2 })
+		}
+	}
+}
+
+return results
+```
+This setup enabled us to collect 1800 data entries, collecting 100 independent degrees 
+
+
 ### Challenges
+One of the most challenging parts of data collection is the runtime of the algorithm. High dimensions, even 5x5, and high degree of randomization, 15, increase the runtime of the algorithm to sometimes 25-30 minutes. With the setup introduced before, the data collection process took about 3 days for a `MacBook Air 2013` to complete. 
+
+
+#### Monitoring
+We needed to constantly monitor the execution
 
 ### Visualization
 
