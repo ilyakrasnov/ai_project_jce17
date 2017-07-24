@@ -151,9 +151,8 @@ The goal of the experiment was to compare how different heuristic functions perf
 
 * `dimensions: [ 3, 4, 5 ]`
 * `rand_degrees: [ 5, 10, 15 ]`
-* `iterations: 100`
+* `nr_of_iterations: 100`
 * `heuristic_functions: [ h1, h2 ]`
-
 
 
 ### Collecting the data
@@ -165,7 +164,7 @@ results = []
 
 for (dimension of dimensions) {
 	for (rand_degree of rand_degrees) {
-		do iterations times {
+		nr_of_iterations times do {
 		
 			// Setup
 			puzzle = create_randomized_puzzle(dimension, rand_degree)
@@ -183,15 +182,22 @@ for (dimension of dimensions) {
 
 return results
 ```
-This setup enabled us to collect 1800 data entries, collecting 100 independent degrees 
+
+This setup enabled us to collect 1800 data entries, collecting up to 100 observations for each heuristic on every combination of dimension and randomization degree.
 
 
 ### Challenges
+
+#### Runtime / Amount of Steps
 One of the most challenging parts of data collection is the runtime of the algorithm. High dimensions, even 5x5, and high degree of randomization, 15, increase the runtime of the algorithm to sometimes 25-30 minutes. With the setup introduced before, the data collection process took about 3 days for a `MacBook Air 2013` to complete. 
 
+As discussed prior to the project start, we also introduces an upper bound for algorithm steps, `b = 10000`. If the algorithm takes more than `b` steps, the returned value for steps is `undefinded` or missing. For data analysis purpuses it is treated as `NaN`.  
 
-#### Monitoring
-We needed to constantly monitor the execution
+
+#### Saving the Results
+Due to the chosen architecture, the calculations were done by the JavaScript engine inside the browser. There is no easy way to write to the file system directly from the execution thread. Thus the results were output to the console at the end of the run. 
+
+In case the computer was restarted or crashed without any input on our side, it needed to be frequently monitored and the calculation process restarted if needed.
 
 ### Visualization
 
