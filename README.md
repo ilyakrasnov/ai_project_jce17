@@ -5,13 +5,14 @@
 
 In 8 puzzel game the goal is to reorder tiels from a start state to the goal state
 
-![alt text](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/img_1_start_and_stop_states.PNG)
+<img src="images/img_1_start_and_stop_states.PNG" alt="start and stop states" width="600">
     
        
 When trying to implement an algorithem for solving 8 puzzel - the main considiration is to choose what is the next step, what tile to move on board. this would determine if we are getting closer to the goal or not.
 
 
-![alt text](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/img_2_successors.PNG)
+<img src="images/img_2_successors.PNG" alt="successor" width="600">
+
     
 The problem of 8 puzzel, can be presented as a Graph **Search problem**. 
 
@@ -132,7 +133,8 @@ This approach acctualy gives us more information about how many steps would be r
 
 *This function is  Admissable.*
     
-*** image from slide - h1 , h2 
+<img src="images/h1_2_example.png" alt="heuristic functions" width="400">
+
 
 ### Challenges
 It was not easy to implemet, there are many "moving parts" and there were many adjustments and corrections needed. 
@@ -141,7 +143,6 @@ We used *Logging* and *Visualization* of the working algorithm displaying each s
 
 
 ![alt text](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/img_visualizing_fring_closed.PNG)
-    
  
 ## 3 - Exploration of A* performance with different heuristic functions
 
