@@ -226,6 +226,9 @@ image - 2,  3
 time is more clear, steps can vary
 also can be observed that larger board, is not effected by higher rand degree.
 
+--- image 6
+decide  if to add this image (we can see that in heiger rand degree the size of the board matters, in a larger board )
+
 3. 
 ### Collected data imbalance
 there are diffrent amount of results for each board size
@@ -233,3 +236,19 @@ there are diffrent amount of results for each board size
 h1 - did not solve the puzzel as well as h2. it took more steps, therefore, in more cases the search did not compleate. it took more then 10,000 steps.
 h1 finished with result in 81% of the testes
 h2 finished with result in 87% of the testes
+
+mean of steps number
+h1 is higher then h2. 1142 vs 783 steps
+
+h1 - max time to solve a board was 16.5 minutes. (dim 5 rand deg - 10)
+h2 - max time to solve a board was 14.5 minutes 
+
+h1 mean time to solve a board - 0.4 minutes 
+h2 mean time to solve a board-  0.33 minutes
+
+h1 std is 1.3 min
+h2 std is 1.4 min
+
+
+
+
