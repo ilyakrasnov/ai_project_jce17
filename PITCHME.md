@@ -212,4 +212,7 @@ The number of steps declines at certain point for higher randomization degrees a
 
 <img src="images/results_2.png" alt="successor">
 
+---
+
+## The End
 
