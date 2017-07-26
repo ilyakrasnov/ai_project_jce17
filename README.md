@@ -212,22 +212,33 @@ we used the data collected and plotted diffrent views, to get insights into the 
 
 
 ---image 1 - each board size, comparing h1 and h2 with diffrent rand degree.
+<img src="images/results_1.png" alt="successor" width="600">
+
 
 
 
 #### Is h2 better than h1 
 on smaller board, larger boards there is less difference
 image - 4 - by steps  h2 is better on small board, larger board less of a difference 
+<img src="images/results_4.png" alt="successor" width="600">
+
 image 5-  by time   - h2 seems better
+<img src="images/results_5.png" alt="successor" width="600">
 
 
 2. difference between steps and time -
 image - 2,  3
+<img src="images/results_2.png" alt="successor" width="600">
+<img src="images/results_3.png" alt="successor" width="600">
+
+
 time is more clear, steps can vary
 also can be observed that larger board, is not effected by higher rand degree.
 
---- image 6
-decide  if to add this image (we can see that in heiger rand degree the size of the board matters, in a larger board )
+--- image 6  - decide  if to add this image (we can see that in heiger rand degree the size of the board matters, in a larger board )
+<img src="images/results_6.png" alt="successor" width="600">
+
+
 
 3. 
 ### Collected data imbalance
