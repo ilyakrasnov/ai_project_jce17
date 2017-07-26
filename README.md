@@ -201,8 +201,21 @@ In case the computer was restarted or crashed without any input on our side, it 
 
 ### Visualization
 
-## Results
+## Observations and Insights
 
-1. h2 better than h1 (for higher dimensions and degrees of randomization)
+As dscribed above, we checked diffrent scenarios, board dimentions, randomization degree and huristic functions.
+we used the data collected and plotted diffrent views, to get insights into the results
+the influence of higher rand deg, is less 
+Randomization degree influence is not always clear, when using a larger board the influence of higher Rand Degree has smaller effects
+
+
+---image 1 - each board size, comparing h1 and h2 with diffrent rand degree.
+
+
+Higher Randomization Degree (10,15) influences the runtime and steps only for small board dimentions but in larger dimentions the influence is relative similar. 
+
+
+1. 
+h2 better than h1 (for higher dimensions and degrees of randomization)
 2. difference between steps and time
 3. 
