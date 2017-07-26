@@ -149,7 +149,7 @@ return results
 
 +++
 
-| heuristic  |  Max. Time  | Min. Time | Mean. Time |  Max. Steps | Min. Steps  | Mean Steps  |
+| h |  Max. Time  | Min. Time | Mean. Time |  Max. Steps | Min. Steps  | Mean Steps  |
 |:---:|:---:|:---:|:-:|:---:|:---:|---:| 
 | h1  | 16.5 | 1.15 * 10<sup>-5</sup>  |  0.40 |  9737 | 2 | 1142 |
 | h2 | 14.5  | 1.09 * 10<sup>-5</sup>  | 0.33  | 9995  | 2 | 783 |
