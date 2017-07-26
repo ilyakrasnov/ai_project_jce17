@@ -217,4 +217,4 @@ The number of steps declines at certain point for higher randomization degrees a
 ## The End
 
 
-#[Full Report](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/README.md)
+####[Full Report](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/README.md)
