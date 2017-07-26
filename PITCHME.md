@@ -66,7 +66,7 @@
 
 +++ 
 
-###[CLICK HERE](ngdeploy.ilyakrasnov.s3-website-us-west-2.amazonaws.com)
+###[CLICK HERE](http://ngdeploy.ilyakrasnov.s3-website-us-west-2.amazonaws.com)
 
 ---
 
@@ -76,9 +76,9 @@
 
 ### Main Components
 
-* *PuzzleCreator* creates randomized boards with different dimensions
-* *AStar* implements the search algorithm with different heuristics
-* *Stats* defines and runs the experiment
+* **PuzzleCreator** creates randomized boards with different dimensions
+* **AStar** implements the search algorithm with different heuristics
+* **Stats** defines and runs the experiment
 
 
 +++
@@ -146,3 +146,70 @@ return results
 ---
 
 ## Observation and Insights
+
++++
+
+| heuristic  |  Max. Time  | Min. Time | Mean. Time |  Max. Steps | Min. Steps  | Mean Steps  |
+|:---:|:---:|:---:|:-:|:---:|:---:|---:| 
+| h1  | 16.5 | 1.15 * 10<sup>-5</sup>  |  0.40 |  9737 | 2 | 1142 |
+| h2 | 14.5  | 1.09 * 10<sup>-5</sup>  | 0.33  | 9995  | 2 | 783 |
+
++++ 
+
+### Randomization Degree
+
+Randomization degree influence is not always clear, when using a larger board the influence of higher Rand Degree has smaller effects.
+
+
++++
+
+<img src="images/results_1.png" alt="successor">
+
++++
+
+### Is H2 Better Than H1?
+
++++ 
+
+**Simple intuition**: h2 gives more information on how far you are from the goal state, thus h2 should be better.
+
++++
+
+### Steps Comparison 1
+<img src="images/results_4.png" alt="successor">
+
+
+
++++
+
+### Steps Comparison 2
+
+Not every search finished within the given steps threshold (10,000)
+
+* h1 finished with result in `81%` of the testes
+* h2 finished with result in `87%` of the testes
+* Mean # of steps for h1: `1142` 
+* Mean # of steps for h2: `783`
+
++++ 
+
+### Time Comparison
+<img src="images/results_5.png" alt="successor" width="600">
+
++++
+
+
+### Time vs Steps
+
++++ 
+The higher the randomization degree of a board, the more time it takes for any alogrithm to solve it: 
+
+<img src="images/results_3.png" alt="successor">
+
++++
+
+The number of steps declines at certain point for higher randomization degrees and board dimensions:
+
+<img src="images/results_2.png" alt="successor">
+
+

@@ -229,7 +229,6 @@ Plotting the linear regression of steps vs. runtime for different rand degrees w
 
 
 
-
 ### Is H2 Better Than H1?
 In order to better compare the different heuristics, we first inspect them separately by time and steps.
 
