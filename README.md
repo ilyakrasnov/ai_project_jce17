@@ -199,23 +199,37 @@ Due to the chosen architecture, the calculations were done by the JavaScript eng
 
 In case the computer was restarted or crashed without any input on our side, it needed to be frequently monitored and the calculation process restarted if needed.
 
-### Visualization
+
+
 
 ## Observations and Insights
 
 As dscribed above, we checked diffrent scenarios, board dimentions, randomization degree and huristic functions.
 we used the data collected and plotted diffrent views, to get insights into the results
-the influence of higher rand deg, is less 
-Randomization degree influence is not always clear, when using a larger board the influence of higher Rand Degree has smaller effects
+
+
+* Randomization degree influence is not always clear, when using a larger board the influence of higher Rand Degree has smaller effects
 
 
 ---image 1 - each board size, comparing h1 and h2 with diffrent rand degree.
 
 
-Higher Randomization Degree (10,15) influences the runtime and steps only for small board dimentions but in larger dimentions the influence is relative similar. 
+
+#### Is h2 better than h1 
+on smaller board, larger boards there is less difference
+image - 4 - by steps  h2 is better on small board, larger board less of a difference 
+image 5-  by time   - h2 seems better
 
 
-1. 
-h2 better than h1 (for higher dimensions and degrees of randomization)
-2. difference between steps and time
+2. difference between steps and time -
+image - 2,  3
+time is more clear, steps can vary
+also can be observed that larger board, is not effected by higher rand degree.
+
 3. 
+### Collected data imbalance
+there are diffrent amount of results for each board size
+
+h1 - did not solve the puzzel as well as h2. it took more steps, therefore, in more cases the search did not compleate. it took more then 10,000 steps.
+h1 finished with result in 81% of the testes
+h2 finished with result in 87% of the testes
