@@ -61,7 +61,7 @@ The project consisted of a few parts.
 2. Implementing the A* algorithm
 3. Exploration of A* performance with different heuristic functions
 
-## 1 - Creating an online 8puzzle game
+## Creating an online 8puzzle game
 ### Dev environment and tools
 The [online game](http://ngdeploy.ilyakrasnov.s3-website-us-west-2.amazonaws.com/) was developed in [TypeScript](https://www.typescriptlang.org/) using the [Angular](https://angular.io/) framework for frontend development. The framework enables fast development process with reusable components and supporting application structure.
 
@@ -113,7 +113,7 @@ The second approach was to take the goal state of the puzzle and make a number o
 A refinement we also implemented was to prohibiting a tile from being moved twice in a row, thus returning to the same state after two consecutive moves. This distinction helped us to reliably create a randomized boards and also introduced another dimension of measurement, we previously were not intending of measuring, the *degree of randomization*.
 
 
-## 2 - Implementing the A* algorithm
+## Implementing the A* algorithm
 We chose two diffrent heruristic functions and explored the diffrence in performance counting number of steps, and time.
 
 
@@ -144,7 +144,7 @@ We used *Logging* and *Visualization* of the working algorithm displaying each s
 
 ![alt text](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/img_visualizing_fring_closed.PNG)
  
-## 3 - Exploration of A* performance with different heuristic functions
+## Exploration of A* performance with different heuristic functions
 
 ### Experiment setup
 The goal of the experiment was to compare how different heuristic functions perform for different puzzle dimension and different degrees of randomization. Following variables were introduced:
@@ -201,7 +201,7 @@ In case the computer was restarted or crashed without any input on our side, it 
 
 ### Visualization
 
-## 4 - Results
+## Results
 
 1. h2 better than h1 (for higher dimensions and degrees of randomization)
 2. difference between steps and time
