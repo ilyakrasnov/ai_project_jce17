@@ -21,6 +21,17 @@ export class PuzzleComponent {
   newRandDegree = 5;
   randDegrees = _.range(31);
   GOAL_STATE = [];
+  newHeuristic;
+
+  heuristics = [
+    { id: 1,
+      displayName: 'Number of Misplaced Tiles'
+    },
+    { id: 2,
+      displayName: 'Sum of Manhattan Distances'
+    }
+  ]
+
 
   board = [
     // { x: 1, y: 1, value: 1 }, { x: 2, y: 1, value: 2 }, { x: 3, y: 1, value: 3 },
@@ -57,6 +68,7 @@ export class PuzzleComponent {
 	}
 
   runAlgorithm(){
+    this.aStar = new AStar(this.GOAL_STATE, this.board, this.newHeuristic);
       let result = this.aStar.run();
 
       if(result){

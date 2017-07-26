@@ -10,8 +10,8 @@ md-icon{
 }
 
 .mat-card{
-  float:left;
-  width: 40%;
+  /*float:left;*/
+  width: 60%;
 }
 .mini {
   float: left;
@@ -154,4 +154,18 @@ span {
 }
 md-card-footer {
   padding: 0 25px 25px;
+}
+
+
+.example-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.example-selected-value {
+  margin: 15px 0;
 }

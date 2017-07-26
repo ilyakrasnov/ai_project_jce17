@@ -19,6 +19,9 @@ export class AStar {
 	}
 
 	constructor(goal, start, h = 2) {
+		console.log("###### GOT H ######");
+		console.log(h);
+
 		this.goal = goal;
 		this.movement = new MovementService();
 		this.dimension = Math.sqrt(goal.length);

@@ -3,7 +3,34 @@
 
     <md-card>
       <md-card-title-group>
-        <md-card-title>Puzzle to Solve
+        <!--<img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>-->
+        <md-card-title>Settings
+        </md-card-title>
+        <!--<md-card-subtitle *ngIf="subtitle">{{ subtitle | bcEllipsis:40 }}</md-card-subtitle>-->
+      </md-card-title-group>
+      <md-card-content>
+        <md-select  placeholder="Dimension" [(ngModel)]="newDimension" >
+          <md-option *ngFor="let dimension of [3,4,5]" [value]="dimension">{{ dimension }}</md-option>
+        </md-select>
+
+
+        <md-select  placeholder="Degree of Randomization" [(ngModel)]="newRandDegree" >
+          <md-option *ngFor="let rand of randDegrees" [value]="rand">{{ rand }}</md-option>
+        </md-select>
+      </md-card-content>
+      <md-card-actions>
+        <p></p><p></p>
+        <button md-raised-button (click)="initializeBoardAndGoal()">Randomize Puzzle</button>
+      </md-card-actions>
+    </md-card>
+
+    <md-card>
+      <md-card-title-group>
+        <md-card-title>#Moves: {{ moves.length }}
+          <span ng-class="md-48">
+            <md-icon  class="green" *ngIf=" finished()">done</md-icon>
+            <md-icon  class="red" *ngIf="!finished()">clear</md-icon>
+          </span>
         </md-card-title>
         <!--<img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>-->
 
@@ -20,45 +47,23 @@
       </md-card-content>
     </md-card>
 
+
     <md-card>
       <md-card-title-group>
         <!--<img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>-->
-        <md-card-title>Settings
-        </md-card-title>
+        <md-card-title>A*</md-card-title>
         <!--<md-card-subtitle *ngIf="subtitle">{{ subtitle | bcEllipsis:40 }}</md-card-subtitle>-->
       </md-card-title-group>
       <md-card-content>
-        <md-select  placeholder="Dimension" [(ngModel)]="newDimension" >
-          <md-option *ngFor="let dimension of [3,4,5]" [value]="dimension">{{ dimension }}</md-option>
-        </md-select>
-
-
-      <md-select  placeholder="Degree of Randomization" [(ngModel)]="newRandDegree" >
-          <md-option *ngFor="let rand of randDegrees" [value]="rand">{{ rand }}</md-option>
-        </md-select>
-      </md-card-content>
-      <md-card-actions>
-        <button md-raised-button (click)="initializeBoardAndGoal()">Randomize Puzzle</button>
-      </md-card-actions>
-    </md-card>
-    <md-card>
-      <md-card-title-group>
-        <!--<img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>-->
-        <md-card-title>Your Moves: {{ moves.length }}, Finished:
-          <span ng-class="md-48">
-            <md-icon  class="green" *ngIf=" finished()">done</md-icon>
-            <md-icon  class="red" *ngIf="!finished()">clear</md-icon>
-          </span>
-        </md-card-title>
-        <!--<md-card-subtitle *ngIf="subtitle">{{ subtitle | bcEllipsis:40 }}</md-card-subtitle>-->
-      </md-card-title-group>
-      <md-card-content>
-        <p></p>
-        <p>  </p>
+        <md-radio-group class="example-radio-group" [(ngModel)]="newHeuristic">
+          <md-radio-button class="example-radio-button" *ngFor="let h of heuristics" [value]="h.id">
+            {{h.displayName}}
+          </md-radio-button>
+        </md-radio-group>
       </md-card-content>
       <md-card-actions>
         <button md-raised-button (click)="runAlgorithm()">Find algorithmic solution</button>
-        <button md-raised-button (click)="runStats()">Run stats</button>
+        <!--<button md-raised-button (click)="runStats()">Run stats</button>-->
       </md-card-actions>
     </md-card>
 
