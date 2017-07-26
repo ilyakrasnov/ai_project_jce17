@@ -204,61 +204,71 @@ In case the computer was restarted or crashed without any input on our side, it 
 
 ## Observations and Insights
 
-As dscribed above, we checked diffrent scenarios, board dimentions, randomization degree and huristic functions.
-we used the data collected and plotted diffrent views, to get insights into the results
+As described above, we checked diffrent scenarios, board dimentions, randomization degree and huristic functions.
+we used the data collected and plotted diffrent views, to get insights into the results.
+
+### Statistical Overview
 
 
-* Randomization degree influence is not always clear, when using a larger board the influence of higher Rand Degree has smaller effects
+The simple statistics of time (in minutes) and number of steps are presented here. We further go deeper into the analysis and insights.
 
 
----image 1 - each board size, comparing h1 and h2 with diffrent rand degree.
-<img src="images/results_1.png" alt="successor" width="600">
+| heuristic  |  Max. Time  | Min. Time | Mean. Time |  Max. Steps | Min. Steps  | Mean Steps  |
+|:---:|:---:|:---:|:-:|:---:|:---:|---:| 
+| h1  | 16.5 | 1.15 * 10<sup>-5</sup>  |  0.40 |  9737 | 2 | 1142 |
+| h2 | 14.5  | 1.09 * 10<sup>-5</sup>  | 0.33  | 9995  | 2 | 783 |
+
+
+
+### Influence of Randomization Degree
+Randomization degree influence is not always clear, when using a larger board the influence of higher Rand Degree has smaller effects.
+
+Plotting the linear regression of steps vs. runtime for different rand degrees we see, that differencec in rand degree have less influence on bigger boards with higher dimensions.
+
+<img src="images/results_1.png" alt="successor">
 
 
 
 
-#### Is h2 better than h1 
-on smaller board, larger boards there is less difference
-image - 4 - by steps  h2 is better on small board, larger board less of a difference 
-<img src="images/results_4.png" alt="successor" width="600">
+### Is H2 Better Than H1?
+In order to better compare the different heuristics, we first inspect them separately by time and steps.
 
-image 5-  by time   - h2 seems better
+#### Steps Comparison
+As we can see in the following image, h2 (*Sum of Manhattan Distances*) has a clear advantage over h1 *# of Misplaced Tiles* for smaller board dimension. Although, the bigger the board, the less of a difference in number of steps we can see.
+ 
+<img src="images/results_4.png" alt="successor">
+
+
+As described above, we introduced a step threshold of 10,000 steps in order to limit the runtime of the algorithm. This means, that in some cases the search would be cancelled by reaching the threshold. By comparing the results, we found the following:
+
+* h1 finished with result in `81%` of the testes
+* h2 finished with result in `87%` of the testes
+
+This is another indicator for the h1 taking more steps to complete a search than h2.
+
+
+In addition to that, the mean number of steps for h1 (1142) is higher than h2 (783).
+
+#### Time Comparison
+
+As opposed to the number of steps, a time advantage of h2 over h1 is seen regardless of dimensino and randomization degree.
+
 <img src="images/results_5.png" alt="successor" width="600">
 
 
-2. difference between steps and time -
-image - 2,  3
-<img src="images/results_2.png" alt="successor" width="600">
-<img src="images/results_3.png" alt="successor" width="600">
+#### Time vs Steps
+
+Clearly, the higher the randomization degree of a board, the more time it takes for any alogrithm to solve it, as can be seen in the next graph:
+<img src="images/results_3.png" alt="successor">
+
+Interestingly though, the same effect can not be confirmed with the number of steps. As we see in the graph below, the number of steps seems to decline at certain point for higher randomization degrees and board dimensions.
+
+<img src="images/results_2.png" alt="successor">
 
 
-time is more clear, steps can vary
-also can be observed that larger board, is not effected by higher rand degree.
+Here is another representation of the same insight using a boxplot.
+<img src="images/results_6.png" alt="successor" width="800">
 
---- image 6  - decide  if to add this image (we can see that in heiger rand degree the size of the board matters, in a larger board )
-<img src="images/results_6.png" alt="successor" width="600">
-
-
-
-3. 
-### Collected data imbalance
-there are diffrent amount of results for each board size
-
-h1 - did not solve the puzzel as well as h2. it took more steps, therefore, in more cases the search did not compleate. it took more then 10,000 steps.
-h1 finished with result in 81% of the testes
-h2 finished with result in 87% of the testes
-
-mean of steps number
-h1 is higher then h2. 1142 vs 783 steps
-
-h1 - max time to solve a board was 16.5 minutes. (dim 5 rand deg - 10)
-h2 - max time to solve a board was 14.5 minutes 
-
-h1 mean time to solve a board - 0.4 minutes 
-h2 mean time to solve a board-  0.33 minutes
-
-h1 std is 1.3 min
-h2 std is 1.4 min
 
 
 
