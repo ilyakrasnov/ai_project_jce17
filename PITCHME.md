@@ -106,13 +106,8 @@
 
 ### Pseudo Code
 
-
-dimensions = [ 3, 4, 5 ]
-rand_degrees = [ 5, 10, 15 ]
-nr_of_iterations = 100
-heuristic_functions = [ h1, h2 ]
-
-
+```
+dimensions = [ 3, 4, 5 ] rand_degrees = [ 5, 10, 15 ] nr_of_iterations = 100 heuristic_functions = [ h1, h2 ]
 results = []
 
 for (dimension of dimensions) {
@@ -134,7 +129,7 @@ for (dimension of dimensions) {
 }
 
 return results
-
+```
 
 +++ 
 
