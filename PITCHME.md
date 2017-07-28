@@ -29,7 +29,7 @@
 
 +++
 
-* Test run algorithm on each 100 randomized puzzles with for different dimensions
+* Test run algorithm on several puzzel dimentions with 100 randomized puzzles each
 	 * 3x3
 	 * 4x4
 	 * 5x5
@@ -85,8 +85,8 @@
 
 ### Challenges - Randomization
 
-1. Total Randomization (shuffle) with assured solvability
-2. Supervised Randomization (make x random moves) - **chosen at the end**
+1. **Total Randomization** (shuffle) with assured solvability
+2. **Supervised Randomization** (make x random moves) - **chosen at the end**
 
 ---
 
@@ -106,7 +106,7 @@
 
 ### Pseudo Code
 
-```
+
 dimensions = [ 3, 4, 5 ]
 rand_degrees = [ 5, 10, 15 ]
 nr_of_iterations = 100
@@ -134,7 +134,7 @@ for (dimension of dimensions) {
 }
 
 return results
-```
+
 
 +++ 
 
