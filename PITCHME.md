@@ -159,6 +159,7 @@ Randomization degree influence is not always clear, when using a larger board th
 
 +++
 [link](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_1.png)
+
 <img src="images/results_1.png" alt="successor">
 
 +++
