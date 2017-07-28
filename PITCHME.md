@@ -105,6 +105,7 @@
 +++ 
 
 ### Pseudo Code
+[Click](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/psudo_code.PNG)
 
 ```
 dimensions = [ 3, 4, 5 ] rand_degrees = [ 5, 10, 15 ] nr_of_iterations = 100 heuristic_functions = [ h1, h2 ]
