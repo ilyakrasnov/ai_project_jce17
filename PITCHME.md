@@ -158,7 +158,7 @@ Randomization degree influence is not always clear, when using a larger board th
 
 
 +++
-
+[link](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_1.png)
 <img src="images/results_1.png" alt="successor">
 
 +++
@@ -172,6 +172,7 @@ Randomization degree influence is not always clear, when using a larger board th
 +++
 
 ### Steps Comparison 1
+[link](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_4.png)
 <img src="images/results_4.png" alt="successor">
 
 
@@ -190,6 +191,7 @@ Not every search finished within the given steps threshold (10,000)
 +++ 
 
 ### Time Comparison
+[link](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_5.png)
 <img src="images/results_5.png" alt="successor" width="600">
 
 +++
