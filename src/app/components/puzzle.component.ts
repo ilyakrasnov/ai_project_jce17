@@ -19,7 +19,7 @@ export class PuzzleComponent {
   dimension = 3;
   newDimension = 3;
   newRandDegree = 5;
-  randDegrees = _.range(31);
+  randDegrees = _.range(9);
   GOAL_STATE = [];
   newHeuristic;
 
