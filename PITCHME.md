@@ -2,7 +2,7 @@
 
 #### Prof. Rachel Ben-Eliyahu-Zohary
 
-#### Project by [Meir Zilkha](https://github.com/mwindowshz) and [Ilya Krasnov](https://github.com/ilyakrasnov)
+#### Project by <a target="_blank" href="https://github.com/mwindowshz">Meir Zilkha</a> and <a target="_blank" href="https://github.com/ilyakrasnov">Ilya Krasnov</a>
 
 
 ---
@@ -11,7 +11,7 @@
 
 +++
 
-* Compare performance of heuristic functions for A*
+* Compare performance of heuristics for A*
 * Apply to a given problem set
 * Make exploration visible and accessible
 
@@ -34,21 +34,21 @@
 	 * 4x4
 	 * 5x5
 
-	 
-+++ 
+
++++
 
 ## Short Recap of A*
 
-* Uses *Best First Search* approach to go over a graph, from a starting state getting to a Goal state.
-* Uses a heuristic function to decide what is the next step.
-
-```F(n) = g(n) + h(n)```
+* Uses *Best First Search* approach to traverse the graph
+* Uses a heuristic function to decide what is the next step: ```F(n) = g(n) + h(n)```
 
 * g(n): number of steps done until this point
-* h(n): a heiristic assumption how many more steps until goal state reached)
+* h(n): a heiristic assumption how many more steps until goal state reached
 
-**If F(n) is Admissable then A* is complete and Optimal.**
-	 
++++
+
+**If F(n) is Admissable then A* is complete and Optimal**
+
 
 ---
 
@@ -58,21 +58,18 @@
 
 * Webapp developed in Typescript (Angular)
 * Source control: Git
-* Charting library: tbd
+* Data analysis: Pandas, Numpy (Jupyter Notebook)
+* Data visualisation: Seaborn
 
 ---
 
-## Live Preview
-
-+++ 
-
-###[CLICK HERE](http://ngdeploy.ilyakrasnov.s3-website-us-west-2.amazonaws.com)
+##<a target="_blank" href="http://ngdeploy.ilyakrasnov.s3-website-us-west-2.amazonaws.com">LIVE PREVIEW</a>
 
 ---
 
 ## Online Game
 
-+++ 
++++
 
 ### Main Components
 
@@ -92,36 +89,40 @@
 
 ## A* Implementation
 
-+++ 
++++
 
 ### Heuristics
 
-<img src="images/h1_2_example.png" alt="heuristic functions" width="400">
+<img src="./assets/md/assets/h1_2_example.png" alt="heuristic functions" width="400">
 
 ---
 
 ## Experiment
 
-+++ 
++++
 
 ### Pseudo Code
-[Click](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/psudo_code.PNG)
+<a target="_blank" href="https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/psudo_code.PNG">Click</a>
 
-```
-dimensions = [ 3, 4, 5 ] rand_degrees = [ 5, 10, 15 ] nr_of_iterations = 100 heuristic_functions = [ h1, h2 ]
+```JavaScript
+dimensions = [ 3, 4, 5 ]
+rand_degrees = [ 5, 10, 15 ]
+nr_of_iterations = 100
+heuristic_functions = [ h1, h2 ]
+
 results = []
 
 for (dimension of dimensions) {
 	for (rand_degree of rand_degrees) {
 		nr_of_iterations times do {
-		
+
 			// Setup
 			puzzle = create_randomized_puzzle(dimension, rand_degree)
-			
+
 			// Run
 			steps1, time1 = aStar.run(puzzle, h1)
 			steps2, time2 = aStar.run(puzzle, h2)
-			
+
 			// Record
 			results.push({ dimension, rand_degree, steps1, time1 })
 			results.push({ dimension, rand_degree, steps2, time2 })
@@ -132,7 +133,7 @@ for (dimension of dimensions) {
 return results
 ```
 
-+++ 
++++
 
 ### Challenges
 
@@ -146,11 +147,11 @@ return results
 +++
 
 | h |  Max. Time  | Min. Time | Mean. Time |  Max. Steps | Min. Steps  | Mean Steps  |
-|:---:|:---:|:---:|:-:|:---:|:---:|---:| 
+|:---:|:---:|:---:|:-:|:---:|:---:|---:|
 | h1  | 16.5 | 1.15 * 10<sup>-5</sup>  |  0.40 |  9737 | 2 | 1142 |
 | h2 | 14.5  | 1.09 * 10<sup>-5</sup>  | 0.33  | 9995  | 2 | 783 |
 
-+++ 
++++
 
 ### Randomization Degree
 
@@ -158,24 +159,24 @@ Randomization degree influence is not always clear, when using a larger board th
 
 
 +++
-[link](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_1.png)
+<a target="_blank" href="https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_1.png">link</a>
 
-<img src="images/results_1.png" alt="successor">
+<img src="./assets/md/assets/results_1.png" alt="successor">
 
 +++
 
 ### Is H2 Better Than H1?
 
-+++ 
++++
 
 **Simple intuition**: h2 gives more information on how far you are from the goal state, thus h2 should be better.
 
 +++
 
 ### Steps Comparison 1
-[link](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_4.png)
+<a target="_blank" href="https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_4.png">link</a>
 
-<img src="images/results_4.png" alt="successor">
+<img src="./assets/md/assets/results_4.png" alt="successor">
 
 
 
@@ -187,35 +188,35 @@ Not every search finished within the given steps threshold (10,000)
 
 * h1 finished with result in `81%` of the testes
 * h2 finished with result in `87%` of the testes
-* Mean # of steps for h1: `1142` 
+* Mean # of steps for h1: `1142`
 * Mean # of steps for h2: `783`
 
-+++ 
++++
 
 ### Time Comparison
-[link](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_5.png)
+<a target="_blank" href="https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_5.png">link</a>
 
-<img src="images/results_5.png" alt="successor" width="600">
+<img src="./assets/md/assets/results_5.png" alt="successor" width="600">
 
 +++
 
 
 ### Time vs Steps
 
-+++ 
-The higher the randomization degree of a board, the more time it takes for any alogrithm to solve it: 
++++
+The higher the randomization degree of a board, the more time it takes for any alogrithm to solve it:
 
-<img src="images/results_3.png" alt="successor">
+<img src="./assets/md/assets/results_3.png" alt="successor">
 
 +++
 
 The number of steps declines at certain point for higher randomization degrees and board dimensions:
 
-<img src="images/results_2.png" alt="successor">
+<img src="./assets/md/assets/results_2.png" alt="successor">
 
 ---
 
 ## The End
 
 
-####[Full Report](https://github.com/ilyakrasnov/ai_project_jce17/blob/master/README.md)
+####<a target="_blank" href="https://github.com/ilyakrasnov/ai_project_jce17/blob/master/README.md">Full Report</a>
