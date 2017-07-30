@@ -12,3 +12,10 @@
   border: 0;
   box-shadow: none;
 }
+
+.reveal table {
+    margin: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 25px;
+}
