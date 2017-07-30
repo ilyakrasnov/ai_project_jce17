@@ -160,15 +160,15 @@ Randomization degree influence is not always clear, when using a larger board th
 
 +++
 
-<img src="images/results_1_1.png" alt="successor">
+<img src="images/results_1_1.jpg" alt="successor">
 
 +++
 
-<img src="images/results_1_2.png" alt="successor">
+<img src="images/results_1_2.jpg" alt="successor">
 
 +++
 
-<img src="images/results_1_3.png" alt="successor">
+<img src="images/results_1_3.jpg" alt="successor">
 
 +++ 
 
@@ -184,15 +184,15 @@ Randomization degree influence is not always clear, when using a larger board th
 
 +++
 
-<img src="images/results_4_1.jpeg" alt="successor">
+<img src="images/results_4_1.jpg" alt="successor">
 
 +++
 
-<img src="images/results_4_2.jpeg" alt="successor">
+<img src="images/results_4_2.jpg" alt="successor">
 
 +++
 
-<img src="images/results_4_3.jpeg" alt="successor">
+<img src="images/results_4_3.jpg" alt="successor">
 
 +++
 
@@ -211,15 +211,15 @@ Not every search finished within the given steps threshold (10,000)
 
 +++
 
-<img src="images/results_5_1.jpeg" alt="successor" width="600">
+<img src="images/results_5_1.jpg" alt="successor" width="600">
 
 +++
 
-<img src="images/results_5_2.jpeg" alt="successor" width="600">
+<img src="images/results_5_2.jpg" alt="successor" width="600">
 
 +++
 
-<img src="images/results_5_3.jpeg" alt="successor" width="600">
+<img src="images/results_5_3.jpg" alt="successor" width="600">
 
 +++
 
