@@ -163,7 +163,18 @@ Randomization degree influence is not always clear, when using a larger board th
 
 <img src="images/results_1.png" alt="successor">
 
+
 +++
+
+<img src="./assets/md/assets/results_1_1.png" alt="successor">
+
++++
+
+<img src="./assets/md/assets/results_1_2.png" alt="successor">
+
++++
+
+<img src="./assets/md/assets/results_1_3.png" alt="successor">
 
 ### Is H2 Better Than H1?
 
