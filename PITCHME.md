@@ -200,8 +200,8 @@ Randomization degree influence is not always clear, when using a larger board th
 
 Not every search finished within the given steps threshold (10,000)
 
-* h1 finished with result in `81%` of the testes
-* h2 finished with result in `87%` of the testes
+* h1 finished with result in `81%` of the tests
+* h2 finished with result in `87%` of the tests
 * Mean # of steps for h1: `1142`
 * Mean # of steps for h2: `783`
 
@@ -211,15 +211,15 @@ Not every search finished within the given steps threshold (10,000)
 
 +++
 
-<img src="images/results_5_1.jpg" alt="successor" width="600">
+<img src="images/results_5_1.jpg" alt="successor">
 
 +++
 
-<img src="images/results_5_2.jpg" alt="successor" width="600">
+<img src="images/results_5_2.jpg" alt="successor">
 
 +++
 
-<img src="images/results_5_3.jpg" alt="successor" width="600">
+<img src="images/results_5_3.jpg" alt="successor">
 
 +++
 
