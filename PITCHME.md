@@ -93,7 +93,7 @@
 
 ### Heuristics
 
-<img src="./assets/md/assets/h1_2_example.png" alt="heuristic functions" width="400">
+<img src="images/h1_2_example.png" alt="heuristic functions" width="400">
 
 ---
 
@@ -161,7 +161,7 @@ Randomization degree influence is not always clear, when using a larger board th
 +++
 <a target="_blank" href="https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_1.png">link</a>
 
-<img src="./assets/md/assets/results_1.png" alt="successor">
+<img src="images/results_1.png" alt="successor">
 
 +++
 
@@ -176,7 +176,7 @@ Randomization degree influence is not always clear, when using a larger board th
 ### Steps Comparison 1
 <a target="_blank" href="https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_4.png">link</a>
 
-<img src="./assets/md/assets/results_4.png" alt="successor">
+<img src="images/results_4.png" alt="successor">
 
 
 
@@ -196,7 +196,7 @@ Not every search finished within the given steps threshold (10,000)
 ### Time Comparison
 <a target="_blank" href="https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_5.png">link</a>
 
-<img src="./assets/md/assets/results_5.png" alt="successor" width="600">
+<img src="images/results_5.png" alt="successor" width="600">
 
 +++
 
@@ -206,13 +206,13 @@ Not every search finished within the given steps threshold (10,000)
 +++
 The higher the randomization degree of a board, the more time it takes for any alogrithm to solve it:
 
-<img src="./assets/md/assets/results_3.png" alt="successor">
+<img src="images/results_3.png" alt="successor">
 
 +++
 
 The number of steps declines at certain point for higher randomization degrees and board dimensions:
 
-<img src="./assets/md/assets/results_2.png" alt="successor">
+<img src="images/results_2.png" alt="successor">
 
 ---
 
