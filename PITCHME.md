@@ -103,7 +103,6 @@
 +++
 
 ### Pseudo Code
-<a target="_blank" href="https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/psudo_code.PNG">Click</a>
 
 ```JavaScript
 dimensions = [ 3, 4, 5 ]
@@ -171,7 +170,7 @@ Randomization degree influence is not always clear, when using a larger board th
 
 <img src="images/results_1_3.jpg" alt="successor">
 
-+++ 
++++
 
 ### Is H2 Better Than H1?
 
