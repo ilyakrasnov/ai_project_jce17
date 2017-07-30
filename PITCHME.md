@@ -159,12 +159,6 @@ Randomization degree influence is not always clear, when using a larger board th
 
 
 +++
-<a target="_blank" href="https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_1.png">link</a>
-
-<img src="images/results_1.png" alt="successor">
-
-
-+++
 
 <img src="images/results_1_1.png" alt="successor">
 
@@ -176,6 +170,8 @@ Randomization degree influence is not always clear, when using a larger board th
 
 <img src="images/results_1_3.png" alt="successor">
 
++++ 
+
 ### Is H2 Better Than H1?
 
 +++
@@ -185,11 +181,18 @@ Randomization degree influence is not always clear, when using a larger board th
 +++
 
 ### Steps Comparison 1
-<a target="_blank" href="https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_4.png">link</a>
 
-<img src="images/results_4.png" alt="successor">
++++
 
+<img src="images/results_4_1.jpeg" alt="successor">
 
++++
+
+<img src="images/results_4_2.jpeg" alt="successor">
+
++++
+
+<img src="images/results_4_3.jpeg" alt="successor">
 
 +++
 
@@ -205,16 +208,25 @@ Not every search finished within the given steps threshold (10,000)
 +++
 
 ### Time Comparison
-<a target="_blank" href="https://github.com/ilyakrasnov/ai_project_jce17/blob/master/images/results_5.png">link</a>
-
-<img src="images/results_5.png" alt="successor" width="600">
 
 +++
 
+<img src="images/results_5_1.jpeg" alt="successor" width="600">
+
++++
+
+<img src="images/results_5_2.jpeg" alt="successor" width="600">
+
++++
+
+<img src="images/results_5_3.jpeg" alt="successor" width="600">
+
++++
 
 ### Time vs Steps
 
 +++
+
 The higher the randomization degree of a board, the more time it takes for any alogrithm to solve it:
 
 <img src="images/results_3.png" alt="successor">
