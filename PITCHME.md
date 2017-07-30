@@ -58,6 +58,7 @@
 
 * Webapp developed in Typescript (Angular)
 * Source control: Git
+* Automatic build and hosting: AWS CodePipeline, CodeBuild, S3
 * Data analysis: Pandas, Numpy (Jupyter Notebook)
 * Data visualisation: Seaborn
 
